@@ -1,9 +1,13 @@
 
-        Java · Postgres · AWS
+```Java · Postgres · AWS```
+
+---
+
+🧑‍💻 GitHub: [@samc13](https://github.com/samc13)
 
 🌍 LinkedIn: [samclarke13](https://www.linkedin.com/in/samclarke13/)
 
-🧑‍💻 GitHub: [@samc13](https://github.com/samc13)
+--- 
 
 ## 🟣 Starling Bank (2019-Present)
 
@@ -15,7 +19,9 @@
 
 2019 - 2021: Software Engineer
 
-## Sinara Consultants Ltd (2016-2019)
+---
+
+## 🔴 Sinara Consultants Ltd (2016-2019)
 
 ```C# · MySql · TypeScript · Knockout.js```
 
@@ -23,7 +29,15 @@
 
 2016 - 2017: Graduate Software Engineer
 
-## Education
+---
+
+## 🎓 Education
 
 MPhys Hons (First Class): Physics, The University of Manchester
 
+A2: Physics A* · Maths with Mechanics A* · Chemistry A
+AS: Psychology A
+
+GCSE: 8 A* · 3 A · 1B
+
+---
