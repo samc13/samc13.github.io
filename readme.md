@@ -1,3 +1,9 @@
+## About
+
+This is a static website using raw HTML and CSS. It's hosted on GitHub pages. 
+
+By including a `.nojekyll` (empty) file at the source root, GitHub pages will not use Jekyll, which is the default behaviour. 
+
 ## Running locally
 
 To get started, make sure that you have Python installed (MacOS machines come with Python pre-installed). 
