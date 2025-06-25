@@ -1,0 +1,11 @@
+.spread-row-content {
+    display: flex;
+    justify-content: center; // Center the whole group horizontally
+    align-items: center; // Vertically align (if needed)
+    gap: 2rem; // Adjust for tightness; try 1rem for tighter
+
+    p {
+        margin: 0; // Remove default paragraph margin for a tighter fit
+        white-space: nowrap; // Prevent wrapping if you want a compact look
+    }
+}

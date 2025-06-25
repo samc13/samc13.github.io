@@ -1,0 +1,12 @@
+@import '../themecolours.module.scss';
+
+.title {
+    font-size: larger;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: smaller;
+    color: $lightgrey;
+    font-family: 'Courier New', Courier, monospace;
+}

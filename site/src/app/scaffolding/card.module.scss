@@ -1,0 +1,13 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center children horizontally */
+    justify-content: center;
+    /* Center children vertically (if you set a height) */
+
+    * {
+        padding: 0.25rem 0rem;
+    }
+}
