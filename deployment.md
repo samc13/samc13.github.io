@@ -1,4 +1,4 @@
-This is the directory for deployment on GitHub pages. 
+To deploy this site to GitHub pages, you need to add static HTML & CSS files to `/docs/out/`.
 
 GitHub pages is configured to look at the `/docs` directory on the main branch and look for an `/out` directory. 
 
@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
 cd site/ &&
 npx next build &&
 cp -r out/ ../docs/out/ &&
+cp out/index.html ../docs/index.html &&
 cd ../ &&
-git add -f docs/out/
+git add -f docs/out/ &&
+git push
 ```
