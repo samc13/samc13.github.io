@@ -20,9 +20,10 @@ const nextConfig: NextConfig = {
 ```bash
 cd site/ &&
 npx next build &&
-cp -r out/ ../docs/out/ &&
-cp out/index.html ../docs/index.html &&
+cp -r out/ ../docs/ &&
+cp out/home.html ../docs/index.html &&
 cd ../ &&
 git add -f docs/out/ &&
+git commit -m -S 'Deployment'
 git push
 ```
