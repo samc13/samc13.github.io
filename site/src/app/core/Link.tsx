@@ -3,7 +3,7 @@ import classes from './link.module.scss';
 
 type LinkProps = {
     href: string,
-    text?: String,
+    text?: string,
     className?: string
 }
 
