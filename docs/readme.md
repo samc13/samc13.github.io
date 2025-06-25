@@ -18,7 +18,9 @@ const nextConfig: NextConfig = {
 * Push this up to remote
 
 ```bash
-cd site/
-npx run build
-cp -r out/ ../docs/
+cd site/ &&
+npx next build &&
+cp -r out/ ../docs/out/ &&
+cd ../ &&
+git add -f docs/out/
 ```
