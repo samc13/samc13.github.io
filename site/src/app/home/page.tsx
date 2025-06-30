@@ -11,7 +11,7 @@ export default function Home() {
       <Summary />
       <Divider width={80} dividerColor="grey" />
       <Socials />
-      <Divider width={80} dividerColor="grey" />
+      <Divider dividerType='section' width={80} dividerColor="grey" />
       <CareerItem
         title="🟣 Starling Bank (2019 - Present)"
         subtitle=" · Java · Postgres · TypeScript · React · AWS · "
@@ -42,7 +42,7 @@ export default function Home() {
           <p key={4}>GCSE: 8 A* · 3 A · 1B</p>,
         ]}
       />
-      <Divider width={80} dividerColor="grey" />
+      <Divider dividerType='section' width={80} dividerColor="grey" />
       <Footer />
     </>
   );

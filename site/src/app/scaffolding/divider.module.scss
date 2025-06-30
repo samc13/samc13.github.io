@@ -8,3 +8,8 @@
     margin-left: auto; // this combined with below centres the divider in the parent component
     margin-right: auto; // this combined with above centres the divider in the parent component
 }
+
+.section-divider {
+    @extend .divider;
+    margin-top: -1.25rem;
+}
