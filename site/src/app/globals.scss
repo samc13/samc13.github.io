@@ -1,8 +1,12 @@
 @import "tailwindcss";
+@import './themecolours.module.scss';
 
 :root {
-  --background: #ffffff;
+  --background: #{$background-light};
   --foreground: #171717;
+  --heading-color: #{$heading-light};
+  --color-primary: #{$color-primary};
+  --color-secondary: #{$color-secondary};
 }
 
 @theme inline {
@@ -14,8 +18,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #{$background-dark};
     --foreground: #ededed;
+    --heading-color: #{$heading-dark};
   }
 }
 

@@ -1,26 +1,25 @@
 import classnames from "./divider.module.scss";
 
-export type DividerColor = "grey" | "dark";
 export type DividerType = "section" | "subsection";
 
 type DividerProps = {
-  width: number;
-  dividerColor: DividerColor;
+  width?: number;
   dividerType?: DividerType;
 };
 
 const Divider = (props: DividerProps) => {
   const dividerType = props.dividerType ?? "subsection";
+  const width = props.width ?? 80;
   return (
     <>
       <div
         className={classnames["divider"]}
-        style={{ width: `${props.width}%` }}
+        style={{ width: `${width}%` }}
       />
       {dividerType === "section" && (
         <div
           className={classnames["section-divider"]}
-          style={{ width: `${props.width - 20}%` }}
+          style={{ width: `${width - 20}%` }}
         />
       )}
     </>

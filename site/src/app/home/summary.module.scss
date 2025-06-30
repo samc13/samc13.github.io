@@ -1,19 +1,19 @@
 @import '../themecolours.module.scss';
 
 .section {
-    background-color: $baseDarker;
+    background-color: var(--heading-color);
     padding: 2rem 0rem;
 }
 
 .title {
     font-size: xx-large;
     font-weight: 800;
-    color: $baseTextLighter;
+    color: var(--color-primary);
     margin-bottom: 0.15rem;
 }
 
 .subtitle {
     font-size: smaller;
-    color: $lightgrey;
+    color: $sub-text;
     margin-bottom: 0.5rem;
 }
