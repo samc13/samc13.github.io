@@ -1,7 +1,7 @@
 import classes from './sectiontitle.module.scss';
 
 type SectionProps = {
-    text: String
+    text: string
 }
 
 const SectionTitle = (props: SectionProps) => {

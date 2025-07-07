@@ -2,7 +2,6 @@ import Divider from "../scaffolding/Divider";
 import Footer from "../scaffolding/Footer";
 import SectionTitle from "../scaffolding/SectionTitle";
 import CareerItem from "./CareerItem";
-import Socials from "./Socials";
 import Summary from "./Summary";
 
 export default function Home() {

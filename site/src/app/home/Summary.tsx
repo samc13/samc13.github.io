@@ -1,5 +1,4 @@
 import Card from "../scaffolding/Card";
-import Divider from "../scaffolding/Divider";
 import fonts from "../scaffolding/fonts.module.scss";
 import Socials from "./Socials";
 import classes from "./summary.module.scss";
