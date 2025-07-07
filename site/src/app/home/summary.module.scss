@@ -3,6 +3,10 @@
 .section {
     background-color: var(--heading-color);
     padding: 2rem 0rem;
+
+    div {
+        font-size: small;
+    }
 }
 
 .title {

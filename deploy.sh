@@ -30,6 +30,9 @@ if [ -f "$DEPLOY_DIR/home.html" ]; then
   mv "$DEPLOY_DIR/home.html" "$DEPLOY_DIR/index.html"
 fi
 
+echo "Adding .nojekyll";
+touch "$DEPLOY_DIR/.nojekyll";
+
 echo "Deployment files are ready in /docs."
 echo "Add, commit, and push changes to publish on GitHub Pages:"
 echo ""

@@ -1,15 +1,12 @@
 @import '../themecolours.module.scss';
 
 .divider {
-    height: 1px;
+    height: 2px;
     background-color: $grey;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     margin-left: auto; // this combined with below centres the divider in the parent component
     margin-right: auto; // this combined with above centres the divider in the parent component
-}
-
-.section-divider {
-    @extend .divider;
-    margin-top: -1.25rem;
+    background: linear-gradient(to right, transparent 0%, var(--foreground) 50%, transparent 100%);
+    border-radius: 1px;
 }

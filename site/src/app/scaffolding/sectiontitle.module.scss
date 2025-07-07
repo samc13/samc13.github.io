@@ -1,0 +1,41 @@
+@import './../themecolours.module.scss';
+
+.section {
+    margin: 3rem 0 1rem 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--foreground);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title span {
+    padding: 0 1.5rem;
+  }
+
+  .section-title::before,
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    z-index: 0;
+    border-radius: 1px;
+  }
+
+  .section-title::before {
+    margin-left: 2rem;
+    background: linear-gradient(to left, var(--color-primary), var(--background));
+  }
+
+  .section-title::after {
+    margin-right: 2rem;
+    background: linear-gradient(to right, var(--color-primary), var(--background));
+  }
