@@ -5,7 +5,7 @@ import Card from '../scaffolding/Card';
 import classes from './careeritem.module.scss';
 
 type CareerItemProps = {
-    title: string,
+    title: React.ReactNode,
     subtitle?: string,
     items: React.ReactNode
 }
