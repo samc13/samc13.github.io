@@ -6,7 +6,7 @@ import classes from './careeritem.module.scss';
 
 type CareerItemProps = {
     title: React.ReactNode,
-    subtitle?: string,
+    subtitle?: React.ReactNode,
     items: React.ReactNode
 }
 
