@@ -4,7 +4,7 @@ import Card from "../scaffolding/Card";
 
 import iconClasses from "./../core/icons.module.scss";
 import flexClasses from "../scaffolding/flex.module.scss";
-import { RiGithubFill, RiLinkedinBoxFill, RiLinkedinBoxLine } from "@remixicon/react";
+import { RiGithubFill, RiLinkedinBoxFill } from "@remixicon/react";
 
 const Socials = () => {
   return (

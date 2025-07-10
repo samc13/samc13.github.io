@@ -1,4 +1,4 @@
-import { RiPlanetLine, RiSparkling2Fill, RiSparkling2Line } from "@remixicon/react";
+import { RiPlanetLine, RiSparkling2Fill } from "@remixicon/react";
 import Divider from "../scaffolding/Divider";
 import Footer from "../scaffolding/Footer";
 import SectionTitle from "../scaffolding/SectionTitle";
