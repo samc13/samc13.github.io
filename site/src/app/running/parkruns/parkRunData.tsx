@@ -1,12 +1,17 @@
+export type ParkRun = {
+  eventName: string;
+  date: string; // Format "YYYY-MM-DD"
+  position: number;
+  time: string; // Format "MM:SS"
+};
 
-export type ParkRunData = {
-    eventName: string;
-    date: string; // Format "YYYY-MM-DD"
-    position: number;
-    time: string; // Format "MM:SS"
-  };
-
-const RunningData: ParkRunData[] = [
+const parkRunData: ParkRun[] = [
+  {
+    eventName: "Roundhay",
+    date: "2025-07-19",
+    position: 104,
+    time: "25:29",
+  },
   {
     eventName: "Roundhay",
     date: "2025-06-28",
@@ -93,4 +98,4 @@ const RunningData: ParkRunData[] = [
   },
 ];
 
-export default RunningData;
+export default parkRunData;

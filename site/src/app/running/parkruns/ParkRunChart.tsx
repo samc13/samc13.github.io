@@ -1,55 +1,19 @@
 "use client";
-import moment from "moment";
 import { Fragment, useState } from "react";
-import {
-  Legend,
-  Line,
-  LineChart,
-  ReferenceLine,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import RunningData, { ParkRunData } from "./runningData";
+import { Legend, Line, LineChart, ReferenceLine, XAxis, YAxis } from "recharts";
 import LocationColorMap from "./seriesColours";
+import DefaultRechartTooltip from "../../rechart/DefaultRechartTooltip";
+import { convertTimeToSeconds, formatTotalSeconds } from "../../utils/TimeUtils";
+import { formatDate, formatDateAsDaySinceEpoch } from "../../utils/DateUtils";
+import parkRunData, { ParkRun } from "./parkRunData";
 
-const epoch: moment.Moment = moment("1970-01-01", "YYYY-MM-DD");
-
-type EnrichedParkRunData = ParkRunData & {
+type EnrichedParkRunData = ParkRun & {
   totalSeconds: number;
   dayRelativeToEpoch: number;
 };
 
-const events = [...new Set(RunningData.map((d) => d.eventName))];
+const events = [...new Set(parkRunData.map((d) => d.eventName))];
 const all = "All";
-
-function convertTimeToSeconds(rawTime: string): number {
-  const [mm, ss] = rawTime.split(":").map(Number);
-  return mm * 60 + ss;
-}
-
-function formatTotalSeconds(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const sec = seconds % 60;
-  return `${m}m ${sec}s`;
-}
-
-function formatDateAsDaySinceEpoch(rawDate: string): number {
-  const date = moment(rawDate, "YYYY-MM-DD");
-  return Math.floor(date.diff(epoch, "days"));
-}
-
-function formatDate(daysSinceEpoch: number): string {
-  const e = epoch.clone();
-  const date = e.add(daysSinceEpoch, "days");
-  return date.format("DD MMM YY");
-}
-
-const tooltipStyle = {
-  backgroundColor: "#364156",
-  border: "1px solid #333",
-  color: "#ededed",
-};
 
 function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
   // get all unique dates
@@ -102,19 +66,7 @@ const ParkRunXAxis = () => {
   );
 };
 
-const ParkRunTooltip = () => {
-  return (
-    <Tooltip
-      labelFormatter={(label) => formatDate(label)}
-      formatter={(value) => formatTotalSeconds(value as number)}
-      contentStyle={tooltipStyle}
-      itemStyle={{ color: "#dbdbdb" }}
-      labelStyle={{ color: "#dbdbdb" }}
-    />
-  );
-};
-
-function enrichParkRunData(rawData: ParkRunData[]): EnrichedParkRunData[] {
+function enrichParkRunData(rawData: ParkRun[]): EnrichedParkRunData[] {
   return rawData.map((d) => ({
     ...d,
     totalSeconds: convertTimeToSeconds(d.time),
@@ -122,10 +74,10 @@ function enrichParkRunData(rawData: ParkRunData[]): EnrichedParkRunData[] {
   }));
 }
 
-const RunningChart = () => {
+const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
 
-  const enrichedData = enrichParkRunData(RunningData).sort(
+  const enrichedData = enrichParkRunData(parkRunData).sort(
     ({ dayRelativeToEpoch: a }, { dayRelativeToEpoch: b }) => a - b
   );
 
@@ -164,7 +116,10 @@ const RunningChart = () => {
         <ParkRunYAxis />
         <Legend />
         <ReferenceLine y={bestTime} strokeDasharray="3 3" />
-        <ParkRunTooltip />
+        <DefaultRechartTooltip
+          labelFormatter={(label: number) => formatDate(label)}
+          formatter={(value: string) => formatTotalSeconds(value as unknown as number)}
+        />
         {selectedEventName === all ? (
           events.map((event) => (
             <Line
@@ -188,6 +143,6 @@ const RunningChart = () => {
       </LineChart>
     </Fragment>
   );
-}
+};
 
-export default RunningChart;
+export default ParkRunChart;

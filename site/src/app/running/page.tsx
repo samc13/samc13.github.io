@@ -1,12 +1,5 @@
-import { Fragment } from "react"
-import RunningChart from "./RunningChart"
+import { redirect } from 'next/navigation';
 
-export default function Running() {
-    return (
-        <Fragment>
-            <div>
-            <RunningChart />
-            </div>
-        </Fragment>
-    )
+export default function RunningRootPage() {
+  redirect('/running/parkruns');
 }
