@@ -5,13 +5,14 @@ type LinkProps = {
     href: string,
     text?: string,
     className?: string
+    newTab?: boolean
 }
 
 const Link = (props: LinkProps) => {
     const text = props.text ?? props.href;
     const className = clsx(classes.link, props.className);
     return (
-        <a href={props.href} className={className} target='_blank'>{text}</a>
+        <a href={props.href} className={className} target={props.newTab ? "_blank" : ""}>{text}</a>
     )
 }
 

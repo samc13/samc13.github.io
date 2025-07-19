@@ -3,9 +3,13 @@ import { Fragment, useState } from "react";
 import { Legend, Line, LineChart, ReferenceLine, XAxis, YAxis } from "recharts";
 import LocationColorMap from "./seriesColours";
 import DefaultRechartTooltip from "../../rechart/DefaultRechartTooltip";
-import { convertTimeToSeconds, formatTotalSeconds } from "../../utils/TimeUtils";
+import {
+  convertTimeToSeconds,
+  formatTotalSeconds,
+} from "../../utils/TimeUtils";
 import { formatDate, formatDateAsDaySinceEpoch } from "../../utils/DateUtils";
 import parkRunData, { ParkRun } from "./parkRunData";
+import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 
 type EnrichedParkRunData = ParkRun & {
   totalSeconds: number;
@@ -44,11 +48,10 @@ function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
 const ParkRunYAxis = () => {
   return (
     <YAxis
-      width={100}
+      {...YAxisDefaults}
       tickFormatter={formatTotalSeconds}
       tickCount={15}
       domain={[18 * 60, 29 * 60]}
-      stroke="#dbdbdb"
     />
   );
 };
@@ -56,12 +59,11 @@ const ParkRunYAxis = () => {
 const ParkRunXAxis = () => {
   return (
     <XAxis
+      {...XAxisDefault}
       dataKey="dayRelativeToEpoch"
-      type="number"
-      domain={["auto", "auto"]}
       tickCount={6}
       tickFormatter={formatDate}
-      stroke="#dbdbdb"
+      type="number"
     />
   );
 };
@@ -115,10 +117,12 @@ const ParkRunChart = () => {
         <ParkRunXAxis />
         <ParkRunYAxis />
         <Legend />
-        <ReferenceLine y={bestTime} strokeDasharray="3 3" />
+        <ReferenceLine label="Park Run PR" y={bestTime} strokeDasharray="3 3" />
         <DefaultRechartTooltip
           labelFormatter={(label: number) => formatDate(label)}
-          formatter={(value: string) => formatTotalSeconds(value as unknown as number)}
+          formatter={(value: string) =>
+            formatTotalSeconds(value as unknown as number)
+          }
         />
         {selectedEventName === all ? (
           events.map((event) => (

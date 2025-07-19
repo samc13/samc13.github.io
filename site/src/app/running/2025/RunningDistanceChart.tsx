@@ -3,6 +3,7 @@ import { Area, ComposedChart, ReferenceLine, XAxis, YAxis } from "recharts";
 import { StravaRun } from "./stravaData";
 import { formatDate, formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
 import DefaultRechartTooltip from "@/app/rechart/DefaultRechartTooltip";
+import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 
 type RunningDistanceChartProps = {
   data: StravaRun[];
@@ -55,11 +56,13 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
           labelFormatter={(label: number) => formatDate(label)}
         />
         <YAxis
+      {...YAxisDefaults}
           dataKey={"cumulativeDistance"}
           domain={[0, 1000]}
           tickCount={11}
         />
         <XAxis
+              {...XAxisDefault}
           dataKey={"dayRelativeToEpoch"}
           domain={[
             startDateFromEpoch,
