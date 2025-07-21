@@ -8,7 +8,6 @@ import SectionTitle from "@/app/scaffolding/SectionTitle";
 export default function Year2025Page() {
     return (
         <Fragment>
-            <Summary />
             <SectionTitle text="2025 Running Distance" />
             <div>
             <RunningDistanceChart data={stravaData} />

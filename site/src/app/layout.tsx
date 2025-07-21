@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
 import clsx from "clsx";
+import Summary from "./career/Summary";
+import Navbar from "./scaffolding/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,8 @@ export default function RootLayout({
       <body
         className={clsx(geistSans.variable, geistMono.variable, 'antialiased')}
       >
+        <Summary />
+        <Navbar />
         {children}
       </body>
     </html>

@@ -6,7 +6,6 @@ import SectionTitle from "@/app/scaffolding/SectionTitle"
 export default function ParkRunsPage() {
     return (
         <Fragment>
-            <Summary />
             <SectionTitle text="Park Runs" />
             <div>
             <ParkRunChart />

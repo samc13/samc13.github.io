@@ -3,6 +3,7 @@
 // Colour palette:
 $color-primary: $teal;
 $color-primary-dark: $forestGreen;
+$color-primary-darkest: darken($color-primary-dark, 10%);
 $color-primary-light: $tealLight;
 $color-secondary: $greyLight;
 $color-accent: #0070f3; // fixme

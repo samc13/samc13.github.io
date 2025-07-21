@@ -11,7 +11,6 @@ export default function Career() {
   const currentYear = new Date().getFullYear();
   return (
     <>
-      <Summary />
       <SectionTitle text="Career" />
       <Divider />
       <CareerItem
