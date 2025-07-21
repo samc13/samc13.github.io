@@ -4,6 +4,7 @@ import { StravaRun } from "./stravaData";
 import { formatDate, formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
 import DefaultRechartTooltip from "@/app/rechart/DefaultRechartTooltip";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
+import moment from "moment";
 
 type RunningDistanceChartProps = {
   data: StravaRun[];
@@ -43,6 +44,7 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
   const chartData = createCumulativeDistanceData(props.data);
   const startDateFromEpoch = formatDateAsDaySinceEpoch("2025-01-01");
   const endDateFromEpoch = formatDateAsDaySinceEpoch("2025-12-31");
+  const returnFromInjuryFromEpoch = formatDateAsDaySinceEpoch("2025-06-23");
   return (
     <Fragment>
       <ComposedChart
@@ -72,6 +74,7 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
           tickFormatter={formatDate}
         />
         <ReferenceLine label="Target" stroke="green" strokeDasharray="3 3" segment={[{x: startDateFromEpoch, y:0}, {x: endDateFromEpoch, y:1000}]} />
+        <ReferenceLine label="Requirement" stroke="red" strokeDasharray="3 3" segment={[{x: returnFromInjuryFromEpoch, y:305}, {x: endDateFromEpoch, y:1000}]} />
         <Area dataKey={"cumulativeDistance"} type="monotone" strokeWidth={2} />
       </ComposedChart>
     </Fragment>
