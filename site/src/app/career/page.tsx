@@ -4,7 +4,6 @@ import Footer from "../scaffolding/Footer";
 import SectionTitle from "../scaffolding/SectionTitle";
 import CareerItem from "./CareerItem";
 import iconClasses from "./../core/icons.module.scss";
-import Summary from "./Summary";
 import SeparatorDot from "../scaffolding/SeparatorDot";
 
 export default function Career() {

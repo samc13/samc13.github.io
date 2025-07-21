@@ -2,7 +2,6 @@
 import { Fragment } from "react"
 import RunningDistanceChart from "./RunningDistanceChart"
 import stravaData from "./stravaData"
-import Summary from "@/app/career/Summary";
 import SectionTitle from "@/app/scaffolding/SectionTitle";
 
 export default function Year2025Page() {

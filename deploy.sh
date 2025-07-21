@@ -20,16 +20,6 @@ cd "$REPO_DIR"
 mkdir -p "$DEPLOY_DIR"
 cp -r "$OUT_DIR"/* "$DEPLOY_DIR/"
 
-# Rename docs/home.html to docs/index.html if it exists and rename docs/Home.html to docs/index.html
-if [ -f "$DEPLOY_DIR/home.html" ]; then
-    if [ -f "$DEPLOY_DIR/index.html" ]; then
-        echo "Removing old index.html..."
-        rm "$DEPLOY_DIR/index.html"
-    fi
-  echo "Renaming home.html to index.html..."
-  mv "$DEPLOY_DIR/home.html" "$DEPLOY_DIR/index.html"
-fi
-
 echo "Adding .nojekyll";
 touch "$DEPLOY_DIR/.nojekyll";
 

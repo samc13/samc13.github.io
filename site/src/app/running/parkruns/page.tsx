@@ -1,6 +1,5 @@
 import { Fragment } from "react"
 import ParkRunChart from "./ParkRunChart"
-import Summary from "@/app/career/Summary"
 import SectionTitle from "@/app/scaffolding/SectionTitle"
 
 export default function ParkRunsPage() {

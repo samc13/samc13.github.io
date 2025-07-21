@@ -4,7 +4,6 @@ import { StravaRun } from "./stravaData";
 import { formatDate, formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
 import DefaultRechartTooltip from "@/app/rechart/DefaultRechartTooltip";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
-import moment from "moment";
 
 type RunningDistanceChartProps = {
   data: StravaRun[];
