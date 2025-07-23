@@ -23,6 +23,23 @@ cp -r "$OUT_DIR"/* "$DEPLOY_DIR/"
 echo "Adding .nojekyll";
 touch "$DEPLOY_DIR/.nojekyll";
 
+echo "Ensuring home page redirects..."
+cat > docs/index.html <<EOF
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="0; url=/home/index.html" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/home/index.html">/home/index.html</a></p>
+    <script>
+      window.location.replace("/home/index.html");
+    </script>
+  </body>
+</html>
+EOF
+
 echo "Deployment files are ready in /docs."
 echo "Add, commit, and push changes to publish on GitHub Pages:"
 echo ""
