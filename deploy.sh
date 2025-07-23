@@ -28,13 +28,13 @@ cat > docs/index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta http-equiv="refresh" content="0; url=/home/index.html" />
+    <meta http-equiv="refresh" content="0; url=/home" />
     <title>Redirecting...</title>
   </head>
   <body>
-    <p>Redirecting to <a href="/home/index.html">/home/index.html</a></p>
+    <p>Redirecting to <a href="/home">/home</a></p>
     <script>
-      window.location.replace("/home/index.html");
+      window.location.replace("/home");
     </script>
   </body>
 </html>

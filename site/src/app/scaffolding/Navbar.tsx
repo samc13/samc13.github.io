@@ -11,7 +11,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   // Show empty navbar on homepage
-  if (pathname === "/home/") {
+  if (pathname.startsWith("/home/")) {
     return <nav className={classes.navbar} />;
   }
 
