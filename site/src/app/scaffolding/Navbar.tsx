@@ -2,7 +2,7 @@
 import classes from "./navbar.module.scss";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import fonts from "./../scaffolding/fonts.module.scss";
+import fonts from "./../core/fonts.module.scss";
 import Link from "next/link";
 
 const NAV_LINKS = [{ href: "/home", label: "back" }];

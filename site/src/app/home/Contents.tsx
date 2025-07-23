@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Link from "../core/Link";
 
 import classes from './contents.module.scss';
-import fonts from './../scaffolding/fonts.module.scss'
+import fonts from './../core/fonts.module.scss'
 import clsx from "clsx";
 
 export default function Contents() {

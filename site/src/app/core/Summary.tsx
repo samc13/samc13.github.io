@@ -1,6 +1,6 @@
 import { RiAmazonLine, RiDatabase2Line, RiJavaLine } from "@remixicon/react";
 import Card from "../scaffolding/Card";
-import fonts from "../scaffolding/fonts.module.scss";
+import fonts from "../core/fonts.module.scss";
 import Socials from "./Socials";
 import classes from "./summary.module.scss";
 import iconClasses from "./../core/icons.module.scss";
