@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Legend, Line, LineChart, ReferenceLine, XAxis, YAxis } from "recharts";
+import { Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import LocationColorMap from "./seriesColours";
 import DefaultRechartTooltip from "../../rechart/DefaultRechartTooltip";
 import {
@@ -10,6 +10,9 @@ import {
 import { formatDate, formatDateAsDaySinceEpoch } from "../../utils/DateUtils";
 import parkRunData, { ParkRun } from "./parkRunData";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
+import clsx from "clsx";
+
+import classes from './../rechart.module.scss';
 
 type EnrichedParkRunData = ParkRun & {
   totalSeconds: number;
@@ -108,6 +111,11 @@ const ParkRunChart = () => {
           <option value={all}>All</option>
         </select>
       </label>
+      <div className={clsx(classes["chart-container"])}>
+        <ResponsiveContainer
+          width="100%"
+          height={400}
+        >
       <LineChart
         width={700}
         height={600}
@@ -145,6 +153,8 @@ const ParkRunChart = () => {
           />
         )}
       </LineChart>
+      </ResponsiveContainer>
+      </div>
     </Fragment>
   );
 };

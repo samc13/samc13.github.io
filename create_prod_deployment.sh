@@ -24,7 +24,9 @@ main() {
 
   msg "${GREEN}Cleaning previous build...${NOFORMAT}"
   rm -rf "$OUT_DIR"
-  rm -rf "$DEPLOY_DIR"/*
+  if ls "$DEPLOY_DIR"/* 1> /dev/null 2>&1; then
+    rm -rf "$DEPLOY_DIR"/*
+  fi
 
   msg "${GREEN}Building Next.js app...${NOFORMAT}"
   cd "$NEXT_DIR"
