@@ -1,6 +1,14 @@
 "use client";
 import { Fragment, useState } from "react";
-import { Legend, Line, LineChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Legend,
+  Line,
+  LineChart,
+  ReferenceLine,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 import LocationColorMap from "./seriesColours";
 import DefaultRechartTooltip from "../../rechart/DefaultRechartTooltip";
 import {
@@ -12,7 +20,11 @@ import parkRunData, { ParkRun } from "./parkRunData";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 import clsx from "clsx";
 
-import classes from './../rechart.module.scss';
+import classes from "./../rechart.module.scss";
+import styles from "./parkrun.module.scss";
+import Select from "react-select";
+
+const backgroundColor = 'var(--background)'
 
 type EnrichedParkRunData = ParkRun & {
   totalSeconds: number;
@@ -21,6 +33,11 @@ type EnrichedParkRunData = ParkRun & {
 
 const events = [...new Set(parkRunData.map((d) => d.eventName))];
 const all = "All";
+
+const eventOptions = [
+  { value: all, label: all},
+  ...events.map(e => ({value: e, label: e}))
+];
 
 function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
   // get all unique dates
@@ -91,69 +108,85 @@ const ParkRunChart = () => {
       ? formatDataAsSeries(enrichedData)
       : enrichedData.filter((d) => d.eventName === selectedEventName);
 
-  const bestTime: number = [...enrichedData].sort(
+  const bestTime: number = [...enrichedData]
+  .filter(e => selectedEventName === all || e.eventName === selectedEventName)
+  .sort(
     ({ totalSeconds: a }, { totalSeconds: b }) => a - b
   )[0].totalSeconds;
 
   return (
     <Fragment>
-      <label>
-        Select location:{" "}
-        <select
-          value={selectedEventName}
-          onChange={(e) => setSelectedEventName(e.target.value)}
-        >
-          {events.map((loc) => (
-            <option key={loc} value={loc}>
-              {loc}
-            </option>
-          ))}
-          <option value={all}>All</option>
-        </select>
-      </label>
+      <Select
+        inputId="location-select"
+        className={styles["my-select"]}
+        options={eventOptions}
+        value={eventOptions.find(opt => opt.value === selectedEventName)}
+        onChange={opt => setSelectedEventName(opt ? opt.value : all)}
+        isSearchable
+        styles={{
+          singleValue: (provided) => ({
+            ...provided,
+            color: "#fff", // <-- set your desired color here
+          }),
+          control: (provided) => ({ ...provided, backgroundColor: backgroundColor, color: "white" }),
+          container: (provided) => ({ ...provided, minWidth: 220 }),
+          menu: (provided) => ({
+            ...provided,
+            backgroundColor: "#222",      // <-- dropdown background
+            color: "white",
+          }),
+          option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? "#333" : "#222",
+            color: LocationColorMap[state.data.label] || "white",
+          }),
+        }}
+      />
       <div className={clsx(classes["chart-container"])}>
-        <ResponsiveContainer
-          width="100%"
-          height={400}
-        >
-      <LineChart
-        width={700}
-        height={600}
-        data={chartData}
-        margin={{ top: 25, bottom: 25, left: 25, right: 25 }}
-      >
-        <ParkRunXAxis />
-        <ParkRunYAxis />
-        <Legend />
-        <ReferenceLine label="Park Run PR" y={bestTime} strokeDasharray="3 3" />
-        <DefaultRechartTooltip
-          labelFormatter={(label: number) => formatDate(label)}
-          formatter={(value: string) =>
-            formatTotalSeconds(value as unknown as number)
-          }
-        />
-        {selectedEventName === all ? (
-          events.map((event) => (
-            <Line
-              key={event}
-              dataKey={event}
-              stroke={LocationColorMap[event]}
-              connectNulls
-              name={event}
-              type="monotone"
-              strokeWidth={2}
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart
+            width={700}
+            height={600}
+            data={chartData}
+            margin={{ top: 25, bottom: 25, left: 25, right: 25 }}
+          >
+            <ParkRunXAxis />
+            <ParkRunYAxis />
+            <Legend />
+            <ReferenceLine
+              label="Park Run PR"
+              y={bestTime}
+              strokeDasharray="3 3"
             />
-          ))
-        ) : (
-          <Line
-            dataKey="totalSeconds"
-            type="monotone"
-            strokeWidth={2}
-            stroke={LocationColorMap[selectedEventName]}
-          />
-        )}
-      </LineChart>
-      </ResponsiveContainer>
+            <DefaultRechartTooltip
+              labelFormatter={(label: number) => formatDate(label)}
+              formatter={(value: string) =>
+                formatTotalSeconds(value as unknown as number)
+              }
+            />
+            {selectedEventName === all ? (
+              events.map((event) => (
+                <Line
+                  key={event}
+                  dataKey={event}
+                  stroke={LocationColorMap[event]}
+                  connectNulls
+                  name={event}
+                  type="monotone"
+                  strokeWidth={2}
+                />
+              ))
+            ) : (
+              <Line
+                dataKey="totalSeconds"
+                name={selectedEventName}
+                type="monotone"
+                strokeWidth={2}
+                stroke={LocationColorMap[selectedEventName]}
+              />
+            )}
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </Fragment>
   );
