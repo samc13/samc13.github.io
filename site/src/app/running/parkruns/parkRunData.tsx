@@ -6,6 +6,18 @@ export type ParkRun = {
 };
 
 const parkRunData: ParkRun[] = [
+  { 
+    eventName: "Warwick Racecourse",
+    date: "2025-08-02",
+    position: 44,
+    time: "21:23"
+  },
+  { 
+    eventName: "Warwick Racecourse",
+    date: "2024-07-27",
+    position: 110,
+    time: "25:51"
+  },
   {
     eventName: "Roundhay",
     date: "2025-07-19",
