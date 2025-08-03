@@ -7,6 +7,12 @@ export type StravaRun = {
 
 const stravaData: StravaRun[] = [
     {
+        date: "2025-08-03",
+        distance: 6.28,
+        time: "42:07",
+        pace: "6:42"
+    },
+    {
         date: "2025-08-02",
         distance: 5.75,
         time: "26:14",
