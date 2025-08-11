@@ -2,9 +2,10 @@
 const LocationColorMap: Record<string, string> = {
     Roundhay: "#e26ee6",
     MileEnd: "#d9ce3f",
-    ChevinForest: "#CCC9DC",
+    ChevinForest: "#1a751a",
     ArrowValley: "#42f5cb",
-    WarwickRacecourse: "#1a751a",
+    WarwickRacecourse: "#CCC9DC",
+    Birkenhead: "#f53b66",
     Default: "#42f5cb"
   };
 

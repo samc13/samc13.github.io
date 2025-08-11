@@ -92,6 +92,7 @@ function enrichParkRunData(rawData: ParkRun[]): EnrichedParkRunData[] {
 
 const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
+  const [selectedYear, setSelectedYear] = useState(all);
   const [parkRuns, setParkRuns] = useState<ParkRun[]>([]);
   useEffect(() => {
     fetchParkRunData().then(setParkRuns);
@@ -102,17 +103,27 @@ const ParkRunChart = () => {
     { value: all, label: all},
     ...events.map(e => ({value: e, label: e}))
   ];
+  const years = [...new Set(parkRuns.map((r) => r.date.slice(0,4)))];
+  const yearOptions = [
+    { value: all, label: all},
+    ...years.map(y => ({value: y, label: y}))
+  ];
 
   const enrichedData = enrichParkRunData(parkRuns).sort(
     ({ dayRelativeToEpoch: a }, { dayRelativeToEpoch: b }) => a - b
   );
 
+  const filteredData = enrichedData.filter((d) => {
+    return selectedYear == all || d.date.slice(0,4) === selectedYear;
+  });
+
+  // If there are many series, we must reformat the data for Rechart
   const chartData =
     selectedEventName == all
-      ? formatDataAsSeries(enrichedData)
-      : enrichedData.filter((d) => d.eventName === selectedEventName);
+      ? formatDataAsSeries(filteredData)
+      : filteredData.filter((d) => d.eventName === selectedEventName);
 
-  const bestTime: number = [...enrichedData]
+  const bestTime: number = [...filteredData]
   .filter(e => selectedEventName === all || e.eventName === selectedEventName)
   .sort(
     ({ totalSeconds: a }, { totalSeconds: b }) => a - b
@@ -130,7 +141,7 @@ const ParkRunChart = () => {
         styles={{
           singleValue: (provided) => ({
             ...provided,
-            color: "#fff", // <-- set your desired color here
+            color: "#fff",
           }),
           control: (provided) => ({ ...provided, backgroundColor: backgroundColor, color: "white" }),
           container: (provided) => ({ ...provided, minWidth: 220 }),
@@ -146,6 +157,32 @@ const ParkRunChart = () => {
           }),
         }}
       />
+      <Select 
+      inputId="year-select"
+        className={styles["my-select"]}
+        options={yearOptions}
+        value={yearOptions.find(opt => opt.value === selectedYear)}
+        onChange={opt => setSelectedYear(opt ? opt.value : all)}
+        isSearchable
+        styles={{
+          singleValue: (provided) => ({
+            ...provided,
+            color: "#fff",
+          }),
+          control: (provided) => ({ ...provided, backgroundColor: backgroundColor, color: "white" }),
+          container: (provided) => ({ ...provided, minWidth: 220 }),
+          menu: (provided) => ({
+            ...provided,
+            backgroundColor: "#222",      // <-- dropdown background
+            color: "white",
+          }),
+          option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? "#333" : "#222",
+            color: "white",
+          }),
+        }}
+      />
       <div className={clsx(classes["chart-container"])}>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart
@@ -158,7 +195,7 @@ const ParkRunChart = () => {
             <ParkRunYAxis />
             <Legend />
             <ReferenceLine
-              label="Park Run PR"
+              label="Best"
               y={bestTime}
               strokeDasharray="3 3"
             />
