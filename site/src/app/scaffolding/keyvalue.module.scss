@@ -1,0 +1,18 @@
+.wrapper {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.key {
+    font-weight: 600;
+    margin-right: 2rem;
+    width: 175px;
+    max-width: 175px;
+    text-wrap: wrap;
+    display: inline-block;
+}
+
+.value {
+    font-weight: 400;
+    display: inline-block;
+}
