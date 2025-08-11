@@ -15,10 +15,10 @@ type KeyValueProps = {
 export default function KeyValue(props: KeyValueProps) {
   return (
     <Fragment>
-      {props.items.map((kv) => {
+      {props.items.map((kv, i) => {
         const unit = kv.unit === undefined ? '' : ` ${kv.unit}`;
         return (
-          <div className={clsx(classes.wrapper)}>
+          <div key={i} className={clsx(classes.wrapper)}>
             <div className={clsx(classes.key)}>
             <label>{kv.key}: </label>
             </div>
