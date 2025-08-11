@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Legend,
   Line,
@@ -16,7 +16,7 @@ import {
   formatTotalSeconds,
 } from "../../utils/TimeUtils";
 import { formatDate, formatDateAsDaySinceEpoch } from "../../utils/DateUtils";
-import parkRunData, { ParkRun } from "./parkRunData";
+import { fetchParkRunData, ParkRun } from "./parkRunData";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 import clsx from "clsx";
 
@@ -31,13 +31,7 @@ type EnrichedParkRunData = ParkRun & {
   dayRelativeToEpoch: number;
 };
 
-const events = [...new Set(parkRunData.map((d) => d.eventName))];
 const all = "All";
-
-const eventOptions = [
-  { value: all, label: all},
-  ...events.map(e => ({value: e, label: e}))
-];
 
 function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
   // get all unique dates
@@ -98,8 +92,18 @@ function enrichParkRunData(rawData: ParkRun[]): EnrichedParkRunData[] {
 
 const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
+  const [parkRuns, setParkRuns] = useState<ParkRun[]>([]);
+  useEffect(() => {
+    fetchParkRunData().then(setParkRuns);
+  }, []);
 
-  const enrichedData = enrichParkRunData(parkRunData).sort(
+  const events = [...new Set(parkRuns.map((d) => d.eventName))];
+  const eventOptions = [
+    { value: all, label: all},
+    ...events.map(e => ({value: e, label: e}))
+  ];
+
+  const enrichedData = enrichParkRunData(parkRuns).sort(
     ({ dayRelativeToEpoch: a }, { dayRelativeToEpoch: b }) => a - b
   );
 
@@ -112,7 +116,7 @@ const ParkRunChart = () => {
   .filter(e => selectedEventName === all || e.eventName === selectedEventName)
   .sort(
     ({ totalSeconds: a }, { totalSeconds: b }) => a - b
-  )[0].totalSeconds;
+  )[0]?.totalSeconds;
 
   return (
     <Fragment>
