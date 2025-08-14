@@ -8,6 +8,6 @@
     /* Center children vertically (if you set a height) */
 
     * {
-        padding: 0.25rem 0rem;
+        padding: 0.25rem 0rem; // TODO: I think this fucks up styling everywhere I use card... so maybe revise this?
     }
 }
