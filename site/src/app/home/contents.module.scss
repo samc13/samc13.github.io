@@ -1,15 +1,15 @@
 .contents {
-    padding-top: 50px;
-    font-size: xx-large;
-    display: flex;
+  padding-top: 50px;
+  font-size: xx-large;
+  display: flex;
 
   flex-direction: column;
-  justify-content: center;      /* Vertical center */
-  align-items: center;          /* Horizontal center */
-  gap: 2rem;                    /* Space between links */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; // Space between links
 
-    a {
-        display: block;
-        width: 200px;
-    }
+  a {
+    display: block;
+    width: 200px;
+  }
 }
