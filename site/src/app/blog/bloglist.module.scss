@@ -1,0 +1,30 @@
+.blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0rem 1rem;
+    justify-content: flex-start;
+}
+.blog-item {
+    margin: 2px;
+    padding: 0.25rem 1rem;
+    width: 125px;
+    height: 50px;
+    justify-content: center;
+    overflow: hidden;
+    flex: 0 0 175px;
+    transition: font-size 0.2s;
+    font-size: medium;
+
+    &:hover {
+        color: var(--color-primary-light);
+    }
+    &:active, &:focus {
+        font-size: large;
+    }
+    .active-item {
+        color: var(--color-primary);
+    }
+    * {
+        cursor: pointer;
+    }
+}
