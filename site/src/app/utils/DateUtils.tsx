@@ -12,3 +12,8 @@ export function formatDateAsDaySinceEpoch(rawDate: string): number {
   const date = moment(rawDate, "YYYY-MM-DD");
   return Math.floor(date.diff(epoch, "days"));
 }
+
+export function formatBlogPostDate(filename: string): string {
+  const date = moment(filename, "YYYYMMDD");
+  return date.format("YYYY-MM-DD");
+}
