@@ -16,6 +16,14 @@ It uses a bunch of default features:
 
 By including a `.nojekyll` (empty) file at the source root, GitHub pages will not use Jekyll, which is the default behaviour. 
 
+## Building
+
+To build it and find all the ESLint errors that you've introduced, you can run: 
+
+```bash
+npm run build
+```
+
 ## Running locally
 
 To run locally, navigate to `/site` and run: 

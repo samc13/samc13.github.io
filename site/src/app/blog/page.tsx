@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import Card from "../scaffolding/Card";
 import BlogPost from "./BlogPost";
 import BlogList from "./BlogList";
 
@@ -15,7 +14,7 @@ export default function Blog() {
     <Fragment>
       <div className={clsx(classes["page-content"])}>
         <div>
-          Don't get too excited. These are short and low-effort. You could
+          Don&apos;t get too excited. These are short and low-effort. You could
           almost accuse it of being filler content to make this static site
           appear more maintained.
         </div>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import markdown from "./../core/markdown.module.scss";
 import Markdown from "react-markdown";
-import Card from "../scaffolding/Card";
 import Content from "../scaffolding/Content";
 import { formatBlogPostDate } from "../utils/DateUtils";
 

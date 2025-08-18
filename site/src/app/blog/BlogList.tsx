@@ -3,14 +3,18 @@
 import { Fragment, useEffect, useState } from "react";
 import { formatBlogPostDate } from "../utils/DateUtils";
 import fonts from "./../core/fonts.module.scss";
-import Card from "../scaffolding/Card";
 
 import classes from './bloglist.module.scss';
 import clsx from "clsx";
-import Link from "../core/Link";
 
 const BLOG_API_URL =
   "https://api.github.com/repos/samc13/public-blog/contents/blogs"; // Hardcoded? Woof 🐶
+
+  type GithubContentItem = { 
+    name: string;
+    type: 'file' | 'dir' | 'symlink' | 'submodule';
+    // It has other stuff too but we don't care about any of that (yet)
+  }
 
 const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
   const [files, setFiles] = useState<string[]>([]);
@@ -41,10 +45,10 @@ const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
         // Only include markdown files
         const mdFiles = data
           .filter(
-            (item: any) =>
+            (item: GithubContentItem) =>
               item.type === "file" && /^[0-9]{8}\.md$/.test(item.name)
           )
-          .map((item: any) => item.name);
+          .map((item: GithubContentItem) => item.name);
         setFiles(mdFiles);
         setLoading(false);
       })
