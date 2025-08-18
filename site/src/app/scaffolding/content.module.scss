@@ -1,0 +1,8 @@
+@import '../themecolours.module.scss';
+
+.content {
+    background-color: $background-darker;
+    color: var(--color-foreground);
+    border-radius: 1.5rem;
+    padding: 1.5rem 3rem;
+}
