@@ -33,7 +33,6 @@ function createCumulativeDistanceData(data: StravaRun[]): CumulativeRunData[] {
     ...d,
     dayRelativeToEpoch: formatDateAsDaySinceEpoch(d.date),
   }));
-
   const sortedData = [...enrichedData].sort(
     (a, b) => a.dayRelativeToEpoch - b.dayRelativeToEpoch
   );
@@ -50,10 +49,10 @@ function createCumulativeDistanceData(data: StravaRun[]): CumulativeRunData[] {
 }
 
 const RunningDistanceChart = (props: RunningDistanceChartProps) => {
-  const chartData = createCumulativeDistanceData(props.data);
-  const startDateFromEpoch = formatDateAsDaySinceEpoch("2025-01-01");
-  const endDateFromEpoch = formatDateAsDaySinceEpoch("2025-12-31");
-  const returnFromInjuryFromEpoch = formatDateAsDaySinceEpoch("2025-06-23");
+  const chartData: CumulativeRunData[] = createCumulativeDistanceData(props.data);
+  const startDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-01-01");
+  const endDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-12-31");
+  const returnFromInjuryFromEpoch: number = formatDateAsDaySinceEpoch("2025-06-23");
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>

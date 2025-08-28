@@ -9,3 +9,10 @@
         white-space: nowrap; // Prevent wrapping if you want a compact look
     }
 }
+
+.flexboxwrapper {
+    display: flex;
+    justify-content: space-between; // left/right alignment
+    align-items: flex-start;        // align tops
+    gap: 2rem;                      // optional spacing between
+}

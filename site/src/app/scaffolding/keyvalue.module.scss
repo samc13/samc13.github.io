@@ -3,11 +3,16 @@
     padding: 0.5rem 1rem;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+  }
+
 .key {
     font-weight: 600;
     margin-right: 2rem;
-    width: 175px;
-    max-width: 175px;
+    width: 250px;
+    max-width: 250px;
     text-wrap: wrap;
     display: inline-block;
 }
