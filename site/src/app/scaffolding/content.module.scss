@@ -5,6 +5,11 @@
     color: var(--color-foreground);
     border-radius: 1.5rem;
     padding: 1.5rem 3rem;
+    margin-top: 2rem;
+
+    > p {
+        line-height: 2;
+    }
 }
 
 .main-content {
