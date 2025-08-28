@@ -12,12 +12,12 @@ const Socials = () => {
       <div className={clsx(flexClasses["spread-row-content"])}>
         <p>
           <RiGithubFill className={clsx(iconClasses['inline-icon'])} />
-          GitHub:
+          GitHub:&nbsp;
           <Link href="https://github.com/samc13" text="@samc13" />
         </p>
         <p>
           <RiLinkedinBoxFill className={clsx(iconClasses['inline-icon'])} />
-          LinkedIn:
+          LinkedIn:&nbsp;
           <Link
             href="https://www.linkedin.com/in/samclarke13"
             text="samclarke13"

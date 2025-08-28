@@ -15,9 +15,10 @@ function isExternal(link: string) {
 
 const Link = (props: LinkProps) => {
     const text = props.text ?? props.href;
+    const newTab = props.newTab ?? true;
     const className = clsx(classes['custom-link'], props.className);
     return isExternal(props.href) ? (
-            <a href={props.href} className={className} target={props.newTab ? "_blank" : ""}>{text}</a>
+            <a href={props.href} className={className} target={newTab ? "_blank" : ""}>{text}</a>
         ) : (
             <NextLink href={props.href}>
                 {props.text}
