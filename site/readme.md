@@ -34,6 +34,38 @@ npm run dev
 
 and it'll start up at `http://localhost:3000`.
 
+There's a handy script for this: 
+
+```bash
+./run_local.sh
+```
+
+## Create a prod deployment
+
+I've configured Github pages to statically deploy the `/docs/` folder. 
+
+So rather than doing the `npm run build` dance you can instead use a handy script: 
+
+```bash
+./create_prod_deployment.sh
+```
+
+## Test deployment locally
+
+Navigate to `/docs/` and run: 
+
+```bash
+python3 -m http.server 8080
+```
+
+This will run the site at `http://localhost:8080`.
+
+Again, there's a handy script for this:
+
+```bash 
+./test_prod_deployment_locally.sh
+```
+
 ## Libraries used
 
 I've tried to exercise care in only adding libraries when it makes absolutely no sense to try to get by without it

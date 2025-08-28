@@ -1,19 +1,11 @@
-# Running locally
+# Hello.
 
-Navigate to `/site/` and run: 
+I'm Sam. 
 
-```bash
-npm run dev
-```
+Here's a website. 
 
-This will run the site at `http://localhost:3000`.
+There's another README in `/site` which has the finer details about how to develop here and what I've used etc. 
 
-# Test deployment locally
+Since this is the top-level that gets showed when you join the repo, I've kept this a little more non-technical. 
 
-Navigate to `/docs/` and run: 
-
-```bash
-python3 -m http.server 8080
-```
-
-This will run the site at `http://localhost:8080`.
+// TODO: Maybe talk about GitHub pages a little? Static deployment... blah blah. Yup, I'm committing this. 
