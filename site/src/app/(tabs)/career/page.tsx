@@ -1,10 +1,10 @@
 import { RiPlanetLine, RiSparkling2Fill } from "@remixicon/react";
-import Divider from "../scaffolding/Divider";
-import Footer from "../scaffolding/Footer";
-import SectionTitle from "../scaffolding/SectionTitle";
+import Divider from "../../scaffolding/Divider";
+import Footer from "../../structure/Footer";
+import SectionTitle from "../../scaffolding/SectionTitle";
 import CareerItem from "./CareerItem";
-import iconClasses from "./../core/icons.module.scss";
-import SeparatorDot from "../scaffolding/SeparatorDot";
+import iconClasses from "./../../core/icons.module.scss";
+import SeparatorDot from "../../scaffolding/SeparatorDot";
 
 export default function Career() {
   const currentYear = new Date().getFullYear();

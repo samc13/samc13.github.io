@@ -1,8 +1,8 @@
 "use client";
 
 import { Fragment, useEffect, useState } from "react";
-import { formatBlogPostDate } from "../utils/DateUtils";
-import fonts from "./../core/fonts.module.scss";
+import { formatBlogPostDate } from "../../utils/DateUtils";
+import fonts from "./../../core/fonts.module.scss";
 
 import classes from './bloglist.module.scss';
 import clsx from "clsx";

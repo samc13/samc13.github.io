@@ -5,7 +5,7 @@ import SectionTitle from "@/app/scaffolding/SectionTitle";
 import { fetchStravaRunData, StravaRun } from "./stravaData";
 import Statistics from "../Statistics";
 import Divider from "@/app/scaffolding/Divider";
-import Footer from "@/app/scaffolding/Footer";
+import Footer from "@/app/structure/Footer";
 
 export default function Year2025Page() {
   const [runData, setRunData] = useState<StravaRun[]>([]);

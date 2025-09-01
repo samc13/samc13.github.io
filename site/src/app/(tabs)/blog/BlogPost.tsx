@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import markdown from "./../core/markdown.module.scss";
+import markdown from "./../../core/markdown.module.scss";
 import Markdown from "react-markdown";
-import Content from "../scaffolding/Content";
-import { formatBlogPostDate } from "../utils/DateUtils";
+import Content from "../../scaffolding/Content";
+import { formatBlogPostDate } from "../../utils/DateUtils";
 
 const BLOG_RAW_URL =
   "https://raw.githubusercontent.com/samc13/public-blog/refs/heads/main/blogs/";

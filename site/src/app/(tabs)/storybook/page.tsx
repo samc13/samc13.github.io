@@ -1,6 +1,5 @@
-import Link from "../core/Link";
-import Divider from "../scaffolding/Divider";
-
+import Link from "@/app/core/Link";
+import Divider from "@/app/scaffolding/Divider";
 
 export default function Storybook() {
     return (<>

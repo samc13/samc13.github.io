@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Contents from "./Contents";
-import Footer from "../scaffolding/Footer";
+import Footer from "../../structure/Footer";
 
 export default function Home() {
   return (

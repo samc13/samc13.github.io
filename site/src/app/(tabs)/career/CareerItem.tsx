@@ -1,6 +1,6 @@
 
 import clsx from 'clsx';
-import Card from '../scaffolding/Card';
+import Card from '../../scaffolding/Card';
 
 import classes from './careeritem.module.scss';
 

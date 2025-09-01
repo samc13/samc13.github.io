@@ -10,12 +10,12 @@ import {
   YAxis,
 } from "recharts";
 import LocationColorMap from "./seriesColours";
-import DefaultRechartTooltip from "../../rechart/DefaultRechartTooltip";
+import DefaultRechartTooltip from "../../../rechart/DefaultRechartTooltip";
 import {
   convertTimeToSeconds,
   formatTotalSeconds,
-} from "../../utils/TimeUtils";
-import { formatDate, formatDateAsDaySinceEpoch } from "../../utils/DateUtils";
+} from "../../../utils/TimeUtils";
+import { formatDate, formatDateAsDaySinceEpoch } from "../../../utils/DateUtils";
 import { fetchParkRunData, ParkRun } from "./parkRunData";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 import clsx from "clsx";

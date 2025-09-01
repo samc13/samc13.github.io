@@ -1,16 +1,16 @@
 "use client"
 
 import { Fragment, useEffect, useState } from "react";
-import Content from "../scaffolding/Content";
+import Content from "../../scaffolding/Content";
 import clsx from "clsx";
 import { RiGhost2Fill } from "@remixicon/react";
 
-import iconClasses from "./../core/icons.module.scss";
+import iconClasses from "./../../core/icons.module.scss";
 import Markdown from "react-markdown";
-import markdown from "./../core/markdown.module.scss";
-import Footer from "../scaffolding/Footer";
+import markdown from "./../../core/markdown.module.scss";
+import Footer from "../../structure/Footer";
 
-import pageStyle from '../scaffolding/page.module.scss';
+import pageStyle from './../../structure/page.module.scss';
 
 export default function About() {
   const [content, setContent] = useState("");
