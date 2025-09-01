@@ -58,12 +58,10 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
       <div className={clsx(classes["chart-container"])}>
         <ResponsiveContainer
           width="100%"
-          height={400}
+          height={600}
         >
           <ComposedChart
             title="2025"
-            // width={700}
-            // height={600}
             data={chartData}
             margin={{ top: 25, bottom: 25, left: 0, right: 25 }}
           >
