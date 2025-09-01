@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { Fragment } from "react";
 
 type TabGroupProps = {
     title: string;
