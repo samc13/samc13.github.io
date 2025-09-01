@@ -3,7 +3,7 @@
 
 :root {
   --background: #{$background-light};
-  --foreground: #171717;
+  --foreground: #{$font-primary};
   --heading-color: #{$heading-light};
   --color-primary: #{$color-primary};
   --color-primary-dark: #{$color-primary-dark};
@@ -22,7 +22,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #{$background-dark};
-    --foreground: #ededed;
+    --foreground: #{$font-primary};
     --heading-color: #{$heading-dark};
   }
 }
