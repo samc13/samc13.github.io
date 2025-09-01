@@ -10,11 +10,13 @@ import Divider from "../scaffolding/Divider";
 import Content from "../scaffolding/Content";
 import Footer from "../scaffolding/Footer";
 
+import pageStyle from '../scaffolding/page.module.scss';
+
 export default function Blog() {
   const [selectedFile, setSelectedFile] = useState<string>("");
   return (
     <Fragment>
-      <div className={clsx(classes["page-content"])}>
+      <div className={clsx(classes["page-content"], pageStyle["margin-page"])}>
         <Content>
           Don&apos;t get too excited. These are short and low-effort. You could
           almost accuse it of being filler content to make this static site

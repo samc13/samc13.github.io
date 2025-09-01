@@ -13,6 +13,7 @@ export default function Contents() {
         <Link href="/running/parkruns" text="Parkruns." newTab={false} />
         <Link href="/running/strava/2025" text="Strava." newTab={false} />
         <Link href="/blog" text="Blog." newTab={false} />
+        <Link href="/about" text="About." newTab={false} />
       </div>
     </Fragment>
   );
