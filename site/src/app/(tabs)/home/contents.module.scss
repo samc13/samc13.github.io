@@ -1,3 +1,5 @@
+@import './../../themecolours.module.scss';
+
 .contents {
   padding-top: 50px;
   font-size: xx-large;
@@ -10,6 +12,24 @@
 
   a {
     display: block;
-    width: 200px;
+    width: 250px;
   }
+}
+
+.tabgroup {
+  width: 250px;
+  position: relative;
+  color: $font-secondary;
+
+  a {
+    margin-top: 1rem;
+    font-size: smaller;
+    margin-left: 1.5rem;
+
+    &::before {
+      content: '> ';
+      margin-right: 1rem;
+    }
+  }
+
 }

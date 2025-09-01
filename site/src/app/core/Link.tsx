@@ -20,7 +20,7 @@ const Link = (props: LinkProps) => {
     return isExternal(props.href) ? (
             <a href={props.href} className={className} target={newTab ? "_blank" : ""}>{text}</a>
         ) : (
-            <NextLink href={props.href}>
+            <NextLink href={props.href} className={className}>
                 {props.text}
             </NextLink>
         )

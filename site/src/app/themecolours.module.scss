@@ -1,13 +1,5 @@
 @import './colourpalette.module.scss';
 
-// Text
-$font-primary: $offWhite;
-$font-secondary: $coolGrey;
-$font-tertiary: $greyLight;
-$font-primary-dark: $offWhite;
-$font-secondary-dark: $coolGrey;
-$font-tertiary-dark: $greyLight;
-
 // Colour palette:
 $color-primary: $teal;
 $color-primary-dark: $forestGreen;
@@ -16,6 +8,15 @@ $color-primary-light: $tealLight;
 $color-secondary: $greyLight;
 $color-accent: #0070f3; // fixme
 $color-danger: #ff3b3b; // fixme
+
+// Text
+$font-primary: $offWhite;
+$font-secondary: $coolGrey;
+$font-tertiary: $greyLight;
+$font-primary-dark: $offWhite;
+$font-secondary-dark: $coolGrey;
+$font-tertiary-dark: $greyLight;
+$font-link-color: $color-primary-light;
 
 $text-dark: $offBlack;
 $text-light: $offWhite;
@@ -26,7 +27,6 @@ $background-darker: darken($prussianBlue, 5%);
 $heading-dark: $richBlack;
 $heading-light: $outerSpace;
 $border-color: $greyLight;
-$link-color: $color-primary-light;
 $link-hover-color: lighten($color-primary-light, 10%);
 $link-active-color: #002f5c;
 
