@@ -11,7 +11,7 @@ export default function Career() {
   return (
     <>
       <SectionTitle text="Career" />
-      <Divider />
+
       <CareerItem
         title={
           <p>
@@ -46,9 +46,8 @@ export default function Career() {
           <p key={2}>2016 - 2017: Graduate Software Engineer</p>,
         ]}
       />
-      <Divider />
       <SectionTitle text="Education" />
-      <Divider />
+
       <CareerItem
         title={
           <p>
@@ -82,7 +81,6 @@ export default function Career() {
           </p>,
         ]}
       />
-      <Divider />
       <Footer />
     </>
   );
