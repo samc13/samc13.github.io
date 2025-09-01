@@ -9,9 +9,12 @@
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-size: small;
+    color: $font-secondary;
 }
 
 .subtext {
-    color: $sub-text;
+    color: $font-tertiary;
     padding: 0.25rem 0rem;
+    font-size: x-small;
 }
