@@ -1,6 +1,5 @@
 import { RiPlanetLine, RiSparkling2Fill } from "@remixicon/react";
 import Divider from "../../scaffolding/Divider";
-import Footer from "../../structure/Footer";
 import SectionTitle from "../../scaffolding/SectionTitle";
 import CareerItem from "./CareerItem";
 import iconClasses from "./../../core/icons.module.scss";
@@ -81,7 +80,6 @@ export default function Career() {
           </p>,
         ]}
       />
-      <Footer />
     </>
   );
 }

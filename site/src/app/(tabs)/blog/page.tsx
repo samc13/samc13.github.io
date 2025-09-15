@@ -8,7 +8,6 @@ import classes from "./blogpage.module.scss";
 import clsx from "clsx";
 import Divider from "../../scaffolding/Divider";
 import Content from "../../scaffolding/Content";
-import Footer from "../../structure/Footer";
 
 import pageStyle from './../../structure/page.module.scss';
 
@@ -27,7 +26,6 @@ export default function Blog() {
         <Divider />
         <BlogPost filename={selectedFile} />
       </div>
-      <Footer />
     </Fragment>
   );
 }

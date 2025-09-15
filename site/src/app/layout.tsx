@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Header from "./structure/Header";
 import Navbar from "./structure/Navbar";
 import classes from './scaffolding/content.module.scss';
+import Footer from "./structure/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,12 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={clsx(geistSans.variable, geistMono.variable, 'antialiased', classes['main-content'])}
-      >
+      <body>
         <Header />
         <Navbar />
+        <div className={clsx(geistSans.variable, geistMono.variable, 'antialiased', classes['main-content'])}>
         {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );

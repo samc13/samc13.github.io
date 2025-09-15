@@ -1,9 +1,9 @@
+import KeyValue, { KeyValueContent } from "@/app/scaffolding/KeyValue";
 import { Fragment } from "react";
 import { StravaRun } from "./2025/stravaData";
-import KeyValue, { KeyValueContent } from "@/app/scaffolding/KeyValue";
 
-import flex from "./../../../scaffolding/flex.module.scss";
 import clsx from "clsx";
+import flex from "./../../../scaffolding/flex.module.scss";
 
 type DistanceBucketDefinition = { min: number; max?: number };
 

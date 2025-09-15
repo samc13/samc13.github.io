@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { Fragment } from "react";
 
-import classes from './footer.module.scss';
 import Link from "../core/Link";
+import classes from './footer.module.scss';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

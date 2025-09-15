@@ -8,7 +8,6 @@ import { RiGhost2Fill } from "@remixicon/react";
 import iconClasses from "./../../core/icons.module.scss";
 import Markdown from "react-markdown";
 import markdown from "./../../core/markdown.module.scss";
-import Footer from "../../structure/Footer";
 
 import pageStyle from './../../structure/page.module.scss';
 
@@ -28,7 +27,6 @@ export default function About() {
           <RiGhost2Fill className={clsx(iconClasses["inline-icon"])} />
         </Content>
       </div>
-      <Footer />
     </Fragment>
   );
 }
