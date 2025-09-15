@@ -1,3 +1,7 @@
+import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
+import DefaultRechartTooltip from "@/app/rechart/DefaultRechartTooltip";
+import { formatDate, formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
+import clsx from "clsx";
 import { Fragment } from "react";
 import {
   Area,
@@ -7,20 +11,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { StravaRun } from "./stravaData";
-import { formatDate, formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
-import DefaultRechartTooltip from "@/app/rechart/DefaultRechartTooltip";
-import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
-import clsx from "clsx";
 
+import { twoDecimals } from "@/app/utils/NumberUtils";
 import classes from "./../../rechart.module.scss";
+import { EnrichedStravaRun } from "./page";
 
 type RunningDistanceChartProps = {
-  data: StravaRun[];
-};
-
-type EnrichedStravaRun = StravaRun & {
-  dayRelativeToEpoch: number;
+  data: EnrichedStravaRun[];
 };
 
 type CumulativeRunData = {
@@ -28,19 +25,15 @@ type CumulativeRunData = {
   cumulativeDistance: number;
 };
 
-function createCumulativeDistanceData(data: StravaRun[]): CumulativeRunData[] {
-  const enrichedData: EnrichedStravaRun[] = data.map((d) => ({
-    ...d,
-    dayRelativeToEpoch: formatDateAsDaySinceEpoch(d.date),
-  }));
-  const sortedData = [...enrichedData].sort(
+function createCumulativeDistanceData(data: EnrichedStravaRun[]): CumulativeRunData[] {
+  const sortedData = [...data].sort(
     (a, b) => a.dayRelativeToEpoch - b.dayRelativeToEpoch
   );
   let cumulativeDistance = 0;
 
   return sortedData.map((run) => {
     cumulativeDistance += run.distance;
-    cumulativeDistance = Math.round(cumulativeDistance * 100) / 100;
+    cumulativeDistance = twoDecimals(cumulativeDistance);
     return {
       dayRelativeToEpoch: run.dayRelativeToEpoch,
       cumulativeDistance: cumulativeDistance,
