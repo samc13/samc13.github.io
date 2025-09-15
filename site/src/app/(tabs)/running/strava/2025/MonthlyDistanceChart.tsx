@@ -49,7 +49,6 @@ export function bucketRunsByMonth(runs: EnrichedStravaRun[], year: number) {
   }
 
 const MonthlyDistanceChart = ({data}: MonthlyDistanceChartProps) => {
-    console.log(data);
     const bucketedData = bucketRunsByMonth(data, 2025);
     return (
       <Fragment>
