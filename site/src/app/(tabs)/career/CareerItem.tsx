@@ -15,7 +15,7 @@ const CareerItem = (props: CareerItemProps) => {
         <Card>
             <h2 className={clsx(classes.title)}>{props.title}</h2>
             {props.subtitle && (<p className={clsx(classes.subtitle)}>{props.subtitle}</p>)}
-            {props.items && (<p className={clsx(classes.item)}>{props.items}</p>)}
+            {props.items && (<div className={clsx(classes.item)}>{props.items}</div>)}
         </Card>
     )
 }
