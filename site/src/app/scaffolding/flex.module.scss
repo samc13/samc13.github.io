@@ -15,4 +15,10 @@
     justify-content: space-between; // left/right alignment
     align-items: flex-start;        // align tops
     gap: 1rem;                      // optional spacing between
+
+    @media (max-width: 768px) {
+        flex-direction: column; // Stack items vertically
+        align-items: stretch;  // Ensure items take full width
+        gap: 2rem;             // Add spacing between stacked items
+    }
 }

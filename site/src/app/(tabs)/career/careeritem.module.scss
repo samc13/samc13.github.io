@@ -4,10 +4,22 @@
     margin-top: 0.5rem;
     font-size: larger;
     font-weight: 600;
+
+    @media (max-width: 600px) {
+        font-size: medium;
+    }
 }
 
 .subtitle {
     font-size: smaller;
     color: $sub-text;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.item {
+    font-size: medium;
+
+    @media (max-width: 600px) {
+        font-size: small;
+    }
 }

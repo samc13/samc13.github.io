@@ -1,9 +1,9 @@
 import { RiPlanetLine, RiSparkling2Fill } from "@remixicon/react";
 import Divider from "../../scaffolding/Divider";
 import SectionTitle from "../../scaffolding/SectionTitle";
-import CareerItem from "./CareerItem";
-import iconClasses from "./../../core/icons.module.scss";
 import SeparatorDot from "../../scaffolding/SeparatorDot";
+import iconClasses from "./../../core/icons.module.scss";
+import CareerItem from "./CareerItem";
 
 export default function Career() {
   const currentYear = new Date().getFullYear();
@@ -23,7 +23,7 @@ export default function Career() {
         }
         subtitle={<><SeparatorDot />Java<SeparatorDot />Postgres<SeparatorDot />TypeScipt<SeparatorDot />React<SeparatorDot />AWS<SeparatorDot /></>}
         items={[
-          <p key={1}>2022 -{currentYear} (Present): Engineering Lead</p>,
+          <p key={1}>2022 - {currentYear} (Present): Engineering Lead</p>,
           <p key={2}>2021 - 2022: Team Lead</p>,
           <p key={3}>2019 - 2021: Software Engineer</p>,
         ]}
