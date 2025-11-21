@@ -1,6 +1,7 @@
+import SectionTitle from "@/app/scaffolding/SectionTitle";
 import { Fragment } from "react";
 import ParkRunChart from "./ParkRunChart";
-import SectionTitle from "@/app/scaffolding/SectionTitle";
+import ParkRunStats from "./ParkRunStats";
 
 export default function ParkRunsPage() {
   return (
@@ -8,6 +9,10 @@ export default function ParkRunsPage() {
       <SectionTitle text="Park Runs" />
       <div>
         <ParkRunChart />
+      </div>
+      <SectionTitle text="Statistics" />
+      <div>
+        <ParkRunStats />
       </div>
     </Fragment>
   );

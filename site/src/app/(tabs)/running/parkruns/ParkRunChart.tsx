@@ -1,4 +1,6 @@
 "use client";
+import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
+import clsx from "clsx";
 import { Fragment, useEffect, useState } from "react";
 import {
   Legend,
@@ -9,27 +11,22 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import LocationColorMap from "./seriesColours";
 import DefaultRechartTooltip from "../../../rechart/DefaultRechartTooltip";
+import { formatDate } from "../../../utils/DateUtils";
+import { formatTotalSeconds } from "../../../utils/TimeUtils";
 import {
-  convertTimeToSeconds,
-  formatTotalSeconds,
-} from "../../../utils/TimeUtils";
-import { formatDate, formatDateAsDaySinceEpoch } from "../../../utils/DateUtils";
-import { fetchParkRunData, ParkRun } from "./parkRunData";
-import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
-import clsx from "clsx";
+  EnrichedParkRunData,
+  enrichParkRunData,
+  fetchParkRunData,
+  ParkRun,
+} from "./parkRunData";
+import LocationColorMap from "./seriesColours";
 
+import Select from "react-select";
 import classes from "./../rechart.module.scss";
 import styles from "./parkrun.module.scss";
-import Select from "react-select";
 
-const backgroundColor = 'var(--background)'
-
-type EnrichedParkRunData = ParkRun & {
-  totalSeconds: number;
-  dayRelativeToEpoch: number;
-};
+const backgroundColor = "var(--background)";
 
 const all = "All";
 
@@ -52,7 +49,7 @@ function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
         (d) =>
           d.dayRelativeToEpoch === dayRelativeToEpoch && d.eventName === event
       );
-      row[event] = entry ? convertTimeToSeconds(entry.time) : undefined;
+      row[event] = entry ? entry.totalSeconds : undefined;
     }
     return row;
   });
@@ -82,14 +79,6 @@ const ParkRunXAxis = () => {
   );
 };
 
-function enrichParkRunData(rawData: ParkRun[]): EnrichedParkRunData[] {
-  return rawData.map((d) => ({
-    ...d,
-    totalSeconds: convertTimeToSeconds(d.time),
-    dayRelativeToEpoch: formatDateAsDaySinceEpoch(d.date),
-  }));
-}
-
 const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
   const [selectedYear, setSelectedYear] = useState(all);
@@ -100,13 +89,13 @@ const ParkRunChart = () => {
 
   const events = [...new Set(parkRuns.map((d) => d.eventName))];
   const eventOptions = [
-    { value: all, label: all},
-    ...events.map(e => ({value: e, label: e}))
+    { value: all, label: all },
+    ...events.map((e) => ({ value: e, label: e })),
   ];
-  const years = [...new Set(parkRuns.map((r) => r.date.slice(0,4)))];
+  const years = [...new Set(parkRuns.map((r) => r.date.slice(0, 4)))];
   const yearOptions = [
-    { value: all, label: all},
-    ...years.map(y => ({value: y, label: y}))
+    { value: all, label: all },
+    ...years.map((y) => ({ value: y, label: y })),
   ];
 
   const enrichedData = enrichParkRunData(parkRuns).sort(
@@ -114,7 +103,7 @@ const ParkRunChart = () => {
   );
 
   const filteredData = enrichedData.filter((d) => {
-    return selectedYear == all || d.date.slice(0,4) === selectedYear;
+    return selectedYear == all || d.date.slice(0, 4) === selectedYear;
   });
 
   // If there are many series, we must reformat the data for Rechart
@@ -124,10 +113,10 @@ const ParkRunChart = () => {
       : filteredData.filter((d) => d.eventName === selectedEventName);
 
   const bestTime: number = [...filteredData]
-  .filter(e => selectedEventName === all || e.eventName === selectedEventName)
-  .sort(
-    ({ totalSeconds: a }, { totalSeconds: b }) => a - b
-  )[0]?.totalSeconds;
+    .filter(
+      (e) => selectedEventName === all || e.eventName === selectedEventName
+    )
+    .sort(({ totalSeconds: a }, { totalSeconds: b }) => a - b)[0]?.totalSeconds;
 
   return (
     <Fragment>
@@ -135,19 +124,23 @@ const ParkRunChart = () => {
         inputId="location-select"
         className={styles["my-select"]}
         options={eventOptions}
-        value={eventOptions.find(opt => opt.value === selectedEventName)}
-        onChange={opt => setSelectedEventName(opt ? opt.value : all)}
+        value={eventOptions.find((opt) => opt.value === selectedEventName)}
+        onChange={(opt) => setSelectedEventName(opt ? opt.value : all)}
         isSearchable
         styles={{
           singleValue: (provided) => ({
             ...provided,
             color: "#fff",
           }),
-          control: (provided) => ({ ...provided, backgroundColor: backgroundColor, color: "white" }),
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: backgroundColor,
+            color: "white",
+          }),
           container: (provided) => ({ ...provided, minWidth: 220 }),
           menu: (provided) => ({
             ...provided,
-            backgroundColor: "#222",      // <-- dropdown background
+            backgroundColor: "#222", // <-- dropdown background
             color: "white",
           }),
           option: (provided, state) => ({
@@ -157,23 +150,27 @@ const ParkRunChart = () => {
           }),
         }}
       />
-      <Select 
-      inputId="year-select"
+      <Select
+        inputId="year-select"
         className={styles["my-select"]}
         options={yearOptions}
-        value={yearOptions.find(opt => opt.value === selectedYear)}
-        onChange={opt => setSelectedYear(opt ? opt.value : all)}
+        value={yearOptions.find((opt) => opt.value === selectedYear)}
+        onChange={(opt) => setSelectedYear(opt ? opt.value : all)}
         isSearchable
         styles={{
           singleValue: (provided) => ({
             ...provided,
             color: "#fff",
           }),
-          control: (provided) => ({ ...provided, backgroundColor: backgroundColor, color: "white" }),
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: backgroundColor,
+            color: "white",
+          }),
           container: (provided) => ({ ...provided, minWidth: 220 }),
           menu: (provided) => ({
             ...provided,
-            backgroundColor: "#222",      // <-- dropdown background
+            backgroundColor: "#222", // <-- dropdown background
             color: "white",
           }),
           option: (provided, state) => ({
@@ -194,11 +191,7 @@ const ParkRunChart = () => {
             <ParkRunXAxis />
             <ParkRunYAxis />
             <Legend />
-            <ReferenceLine
-              label="Best"
-              y={bestTime}
-              strokeDasharray="3 3"
-            />
+            <ReferenceLine label="Best" y={bestTime} strokeDasharray="3 3" />
             <DefaultRechartTooltip
               labelFormatter={(label: number) => formatDate(label)}
               formatter={(value: string) =>
