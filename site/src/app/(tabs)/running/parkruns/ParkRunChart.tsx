@@ -83,6 +83,12 @@ const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
   const [selectedYear, setSelectedYear] = useState(all);
   const [parkRuns, setParkRuns] = useState<ParkRun[]>([]);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   useEffect(() => {
     fetchParkRunData().then(setParkRuns);
   }, []);
@@ -120,66 +126,70 @@ const ParkRunChart = () => {
 
   return (
     <Fragment>
-      <Select
-        inputId="location-select"
-        className={styles["my-select"]}
-        options={eventOptions}
-        value={eventOptions.find((opt) => opt.value === selectedEventName)}
-        onChange={(opt) => setSelectedEventName(opt ? opt.value : all)}
-        isSearchable
-        styles={{
-          singleValue: (provided) => ({
-            ...provided,
-            color: "#fff",
-          }),
-          control: (provided) => ({
-            ...provided,
-            backgroundColor: backgroundColor,
-            color: "white",
-          }),
-          container: (provided) => ({ ...provided, minWidth: 220 }),
-          menu: (provided) => ({
-            ...provided,
-            backgroundColor: "#222", // <-- dropdown background
-            color: "white",
-          }),
-          option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? "#333" : "#222",
-            color: LocationColorMap[state.data.label] || "white",
-          }),
-        }}
-      />
-      <Select
-        inputId="year-select"
-        className={styles["my-select"]}
-        options={yearOptions}
-        value={yearOptions.find((opt) => opt.value === selectedYear)}
-        onChange={(opt) => setSelectedYear(opt ? opt.value : all)}
-        isSearchable
-        styles={{
-          singleValue: (provided) => ({
-            ...provided,
-            color: "#fff",
-          }),
-          control: (provided) => ({
-            ...provided,
-            backgroundColor: backgroundColor,
-            color: "white",
-          }),
-          container: (provided) => ({ ...provided, minWidth: 220 }),
-          menu: (provided) => ({
-            ...provided,
-            backgroundColor: "#222", // <-- dropdown background
-            color: "white",
-          }),
-          option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? "#333" : "#222",
-            color: "white",
-          }),
-        }}
-      />
+      {isClient && (
+        <>
+          <Select
+            inputId="location-select"
+            className={styles["my-select"]}
+            options={eventOptions}
+            value={eventOptions.find((opt) => opt.value === selectedEventName)}
+            onChange={(opt) => setSelectedEventName(opt ? opt.value : all)}
+            isSearchable
+            styles={{
+              singleValue: (provided) => ({
+                ...provided,
+                color: "#fff",
+              }),
+              control: (provided) => ({
+                ...provided,
+                backgroundColor: backgroundColor,
+                color: "white",
+              }),
+              container: (provided) => ({ ...provided, minWidth: 220 }),
+              menu: (provided) => ({
+                ...provided,
+                backgroundColor: "#222", // <-- dropdown background
+                color: "white",
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isFocused ? "#333" : "#222",
+                color: LocationColorMap[state.data.label] || "white",
+              }),
+            }}
+          />
+          <Select
+            inputId="year-select"
+            className={styles["my-select"]}
+            options={yearOptions}
+            value={yearOptions.find((opt) => opt.value === selectedYear)}
+            onChange={(opt) => setSelectedYear(opt ? opt.value : all)}
+            isSearchable
+            styles={{
+              singleValue: (provided) => ({
+                ...provided,
+                color: "#fff",
+              }),
+              control: (provided) => ({
+                ...provided,
+                backgroundColor: backgroundColor,
+                color: "white",
+              }),
+              container: (provided) => ({ ...provided, minWidth: 220 }),
+              menu: (provided) => ({
+                ...provided,
+                backgroundColor: "#222", // <-- dropdown background
+                color: "white",
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isFocused ? "#333" : "#222",
+                color: "white",
+              }),
+            }}
+          />
+        </>
+      )}
       <div className={clsx(classes["chart-container"])}>
         <ResponsiveContainer width="100%" height={400}>
           <LineChart

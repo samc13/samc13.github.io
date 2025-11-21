@@ -1,8 +1,16 @@
 "use client";
 import { convertTimeToSeconds } from "@/app/utils/TimeUtils";
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { fetchParkRunData, ParkRun } from "./parkRunData";
+import styles from "./ParkRunStats.module.scss";
 import { getColorForPlace } from "./seriesColours";
 
 type LocationStats = {
@@ -73,6 +81,40 @@ function formatSecondsToTime(totalSeconds: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
+// Define table columns
+const columnHelper = createColumnHelper<LocationStats>();
+
+const columns = [
+  columnHelper.accessor("eventName", {
+    header: "Location",
+    cell: (info) => (
+      <span
+        style={{
+          fontWeight: "bold",
+          color: getColorForPlace(info.getValue()),
+        }}
+      >
+        {info.getValue()}
+      </span>
+    ),
+  }),
+  columnHelper.accessor("bestTime", {
+    header: "Best Time",
+  }),
+  columnHelper.accessor("averageTime", {
+    header: "Avg Time",
+  }),
+  columnHelper.accessor("bestPosition", {
+    header: "Position",
+  }),
+  columnHelper.accessor("numberOfVisits", {
+    header: "Visits",
+  }),
+  columnHelper.accessor("formattedDate", {
+    header: "PB Date",
+  }),
+];
+
 const ParkRunStats = () => {
   const [parkRuns, setParkRuns] = useState<ParkRun[]>([]);
   const [locationStats, setLocationStats] = useState<LocationStats[]>([]);
@@ -84,103 +126,54 @@ const ParkRunStats = () => {
     });
   }, []);
 
+  const table = useReactTable({
+    data: locationStats,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ overflowX: "auto" }}>
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            backgroundColor: "var(--background)",
-            color: "var(--text-color)",
-          }}
-        >
+    <div className={styles.container}>
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
           <thead>
-            <tr style={{ borderBottom: "2px solid #333" }}>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                Location
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                Best Time
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                Avg Time
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                Position
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                Visits
-              </th>
-              <th
-                style={{
-                  padding: "12px",
-                  textAlign: "left",
-                  fontWeight: "bold",
-                }}
-              >
-                PB Date
-              </th>
-            </tr>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className={styles.tableHeader}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} className={styles.tableHeaderCell}>
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? styles.sortableHeader
+                            : "",
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                        {{
+                          asc: " 🔼",
+                          desc: " 🔽",
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
           </thead>
           <tbody>
-            {locationStats.map((stat) => (
-              <tr
-                key={stat.eventName}
-                style={{
-                  borderBottom: "1px solid #444",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#333")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "transparent")
-                }
-              >
-                <td
-                  style={{
-                    padding: "12px",
-                    fontWeight: "bold",
-                    color: getColorForPlace(stat.eventName),
-                  }}
-                >
-                  {stat.eventName}
-                </td>
-                <td style={{ padding: "12px" }}>{stat.bestTime}</td>
-                <td style={{ padding: "12px" }}>{stat.averageTime}</td>
-                <td style={{ padding: "12px" }}>{stat.bestPosition}</td>
-                <td style={{ padding: "12px" }}>{stat.numberOfVisits}</td>
-                <td style={{ padding: "12px" }}>{stat.formattedDate}</td>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id} className={styles.tableRow}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className={styles.tableCell}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
@@ -188,12 +181,10 @@ const ParkRunStats = () => {
       </div>
 
       {locationStats.length === 0 && (
-        <p style={{ color: "#888", fontStyle: "italic" }}>
-          Loading park run data...
-        </p>
+        <p className={styles.loadingMessage}>Loading park run data...</p>
       )}
 
-      <div style={{ marginTop: "20px", fontSize: "14px", color: "#888" }}>
+      <div className={styles.summary}>
         <p>Total locations visited: {locationStats.length}</p>
         <p>Total park runs completed: {parkRuns.length}</p>
       </div>
