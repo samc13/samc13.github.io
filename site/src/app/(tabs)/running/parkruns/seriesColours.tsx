@@ -23,10 +23,17 @@ const placeColorMap: Record<string, ColorName> = {
   ArrowValley: ColorName.SOFT_BLUE,
   Birkenhead: ColorName.ROSE_GOLD,
   BlackRocks: ColorName.CORAL,
+  CannonHill: ColorName.PEACH,
   ChevinForest: ColorName.MINT,
   Default: ColorName.MAUVE,
+  HackneyMarshes: ColorName.SAGE,
+  HampsteadHeath: ColorName.LAVENDER,
   MileEnd: ColorName.YELLOW,
+  Millfield: ColorName.APRICOT,
+  RothayPark: ColorName.TURQUOISE,
   Roundhay: ColorName.SEAFOAM,
+  ToottingCommon: ColorName.LILAC,
+  VictoriaDock: ColorName.PINK,
   WarwickRacecourse: ColorName.PERIWINKLE,
 };
 
