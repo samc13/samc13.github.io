@@ -25,7 +25,9 @@ type CumulativeRunData = {
   cumulativeDistance: number;
 };
 
-function createCumulativeDistanceData(data: EnrichedStravaRun[]): CumulativeRunData[] {
+function createCumulativeDistanceData(
+  data: EnrichedStravaRun[]
+): CumulativeRunData[] {
   const sortedData = [...data].sort(
     (a, b) => a.dayRelativeToEpoch - b.dayRelativeToEpoch
   );
@@ -42,17 +44,17 @@ function createCumulativeDistanceData(data: EnrichedStravaRun[]): CumulativeRunD
 }
 
 const RunningDistanceChart = (props: RunningDistanceChartProps) => {
-  const chartData: CumulativeRunData[] = createCumulativeDistanceData(props.data);
+  const chartData: CumulativeRunData[] = createCumulativeDistanceData(
+    props.data
+  );
   const startDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-01-01");
   const endDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-12-31");
-  const returnFromInjuryFromEpoch: number = formatDateAsDaySinceEpoch("2025-06-23");
+  const returnFromInjuryFromEpoch: number =
+    formatDateAsDaySinceEpoch("2025-06-23");
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>
-        <ResponsiveContainer
-          width="100%"
-          height={600}
-        >
+        <ResponsiveContainer width="100%" height={600}>
           <ComposedChart
             title="2025"
             data={chartData}
@@ -64,8 +66,8 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
             <YAxis
               {...YAxisDefaults}
               dataKey={"cumulativeDistance"}
-              domain={[0, 1000]}
-              tickCount={11}
+              domain={[0, 1200]}
+              tickCount={13}
             />
             <XAxis
               {...XAxisDefault}
@@ -75,7 +77,7 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
               tickFormatter={formatDate}
             />
             <ReferenceLine
-              label="Target"
+              label="Requirement"
               stroke="green"
               strokeDasharray="3 3"
               segment={[
@@ -84,13 +86,19 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
               ]}
             />
             <ReferenceLine
-              label="Requirement"
+              label="Injury adjusted requirement"
               stroke="red"
               strokeDasharray="3 3"
               segment={[
                 { x: returnFromInjuryFromEpoch, y: 305 },
                 { x: endDateFromEpoch, y: 1000 },
               ]}
+            />
+            <ReferenceLine
+              label="Target"
+              stroke="green"
+              strokeDasharray="3 3"
+              y={1000}
             />
             <Area
               dataKey={"cumulativeDistance"}
