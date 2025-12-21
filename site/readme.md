@@ -6,7 +6,7 @@ This is a static website created using Next.js:
 npx create-next-app@latest {project_name} -ts
 ```
 
-You can check the next version by goint to `/site` and running:
+You can check the next version by going to `/site` and running:
 
 ```bash
 npx next --version
