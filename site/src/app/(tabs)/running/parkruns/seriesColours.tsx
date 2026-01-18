@@ -19,6 +19,7 @@ enum ColorName {
   SOFT_BLUE = "#87ceeb",
 }
 
+// TODO: More colours
 const placeColorMap: Record<string, ColorName> = {
   ArrowValley: ColorName.SOFT_BLUE,
   Birkenhead: ColorName.ROSE_GOLD,
@@ -27,14 +28,17 @@ const placeColorMap: Record<string, ColorName> = {
   ChevinForest: ColorName.MINT,
   Default: ColorName.MAUVE,
   HackneyMarshes: ColorName.SAGE,
+  Harrogate: ColorName.TEAL,
   HampsteadHeath: ColorName.LAVENDER,
   MileEnd: ColorName.YELLOW,
   Millfield: ColorName.APRICOT,
   RothayPark: ColorName.TURQUOISE,
   Roundhay: ColorName.SEAFOAM,
+  RoundhayWinter: ColorName.SOFT_BLUE,
   ToottingCommon: ColorName.LILAC,
   VictoriaDock: ColorName.PINK,
   WarwickRacecourse: ColorName.PERIWINKLE,
+  WoodhouseMoor: ColorName.PINK,
 };
 
 // Helper function to get the actual hex color for a place
