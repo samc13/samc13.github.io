@@ -1,0 +1,24 @@
+[
+    {
+        "year": 2025,
+        "goals": [
+            {
+                "type": "distance",
+                "timeframe": "year",
+                "value": 1000,
+                "unit": "km"
+            }
+        ]
+    },
+    {
+        "year": 2026,
+        "goals": [
+            {
+                "type": "distance",
+                "timeframe": "year",
+                "value": 700,
+                "unit": "km"
+            }
+        ]
+    }
+]
