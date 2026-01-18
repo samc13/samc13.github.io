@@ -8,6 +8,10 @@ export function formatDate(daysSinceEpoch: number): string {
   return date.format("DD MMM YY");
 }
 
+export function formatAsDaySinceEpoch(date: Date): number {
+  return formatDateAsDaySinceEpoch(date.toISOString().split("T")[0]);
+}
+
 export function formatDateAsDaySinceEpoch(rawDate: string): number {
   const date = moment(rawDate, "YYYY-MM-DD");
   return Math.floor(date.diff(epoch, "days"));
