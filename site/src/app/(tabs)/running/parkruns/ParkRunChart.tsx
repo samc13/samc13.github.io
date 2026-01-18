@@ -12,7 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import DefaultRechartTooltip from "../../../rechart/DefaultRechartTooltip";
-import { formatDate } from "../../../utils/DateUtils";
+import { formatAsDaySinceEpoch, formatDate } from "../../../utils/DateUtils";
 import { formatTotalSeconds } from "../../../utils/TimeUtils";
 import {
   EnrichedParkRunData,
@@ -23,12 +23,13 @@ import {
 import LocationColorMap from "./seriesColours";
 
 import Select from "react-select";
+import styles from "../../../scaffolding/dropdown.module.scss";
 import classes from "./../rechart.module.scss";
-import styles from "./parkrun.module.scss";
 
 const backgroundColor = "var(--background)";
 
 const all = "All";
+const lastSixMonths = "lastSixMonths";
 
 function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
   // get all unique dates
@@ -81,7 +82,7 @@ const ParkRunXAxis = () => {
 
 const ParkRunChart = () => {
   const [selectedEventName, setSelectedEventName] = useState(all);
-  const [selectedYear, setSelectedYear] = useState(all);
+  const [selectedYear, setSelectedYear] = useState(lastSixMonths);
   const [parkRuns, setParkRuns] = useState<ParkRun[]>([]);
   const [isClient, setIsClient] = useState(false);
 
@@ -101,6 +102,7 @@ const ParkRunChart = () => {
   const years = [...new Set(parkRuns.map((r) => r.date.slice(0, 4)))];
   const yearOptions = [
     { value: all, label: all },
+    { value: lastSixMonths, label: "Last Six Months" },
     ...years.map((y) => ({ value: y, label: y })),
   ];
 
@@ -109,6 +111,15 @@ const ParkRunChart = () => {
   );
 
   const filteredData = enrichedData.filter((d) => {
+    if (selectedYear == all) {
+      return true;
+    }
+    if (selectedYear == lastSixMonths) {
+      const sixMonthsAgo = new Date();
+      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+      const sixMonthsAgoDay = formatAsDaySinceEpoch(sixMonthsAgo);
+      return d.dayRelativeToEpoch > sixMonthsAgoDay;
+    }
     return selectedYear == all || d.date.slice(0, 4) === selectedYear;
   });
 

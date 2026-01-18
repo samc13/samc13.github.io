@@ -18,6 +18,8 @@ import { EnrichedStravaRun } from "./page";
 
 type RunningDistanceChartProps = {
   data: EnrichedStravaRun[];
+  year: number;
+  distanceGoal: number;
 };
 
 type CumulativeRunData = {
@@ -43,14 +45,24 @@ function createCumulativeDistanceData(
   });
 }
 
+function getStartOfYear(year: number) {
+  return `${year}-01-01`;
+}
+
+function getEndOfYear(year: number) {
+  return `${year}-12-31`;
+}
+
 const RunningDistanceChart = (props: RunningDistanceChartProps) => {
   const chartData: CumulativeRunData[] = createCumulativeDistanceData(
     props.data
   );
-  const startDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-01-01");
-  const endDateFromEpoch: number = formatDateAsDaySinceEpoch("2025-12-31");
-  const returnFromInjuryFromEpoch: number =
-    formatDateAsDaySinceEpoch("2025-06-23");
+  const startDateFromEpoch: number = formatDateAsDaySinceEpoch(
+    getStartOfYear(props.year)
+  );
+  const endDateFromEpoch: number = formatDateAsDaySinceEpoch(
+    getEndOfYear(props.year)
+  );
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>
@@ -66,7 +78,7 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
             <YAxis
               {...YAxisDefaults}
               dataKey={"cumulativeDistance"}
-              domain={[0, 1200]}
+              domain={[0, props.distanceGoal + 200]}
               tickCount={13}
             />
             <XAxis
@@ -82,23 +94,14 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
               strokeDasharray="3 3"
               segment={[
                 { x: startDateFromEpoch, y: 0 },
-                { x: endDateFromEpoch, y: 1000 },
-              ]}
-            />
-            <ReferenceLine
-              label="Injury adjusted requirement"
-              stroke="red"
-              strokeDasharray="3 3"
-              segment={[
-                { x: returnFromInjuryFromEpoch, y: 305 },
-                { x: endDateFromEpoch, y: 1000 },
+                { x: endDateFromEpoch, y: props.distanceGoal },
               ]}
             />
             <ReferenceLine
               label="Target"
               stroke="green"
               strokeDasharray="3 3"
-              y={1000}
+              y={props.distanceGoal}
             />
             <Area
               dataKey={"cumulativeDistance"}

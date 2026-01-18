@@ -10,6 +10,7 @@ import { EnrichedStravaRun } from "./page";
 
 type MonthlyDistanceChartProps = {
   data: EnrichedStravaRun[];
+  year: number;
 };
 
 /**
@@ -63,8 +64,8 @@ export function bucketRunsByMonth(runs: EnrichedStravaRun[], year: number) {
   return buckets;
 }
 
-const MonthlyDistanceChart = ({ data }: MonthlyDistanceChartProps) => {
-  const bucketedData = bucketRunsByMonth(data, 2025);
+const MonthlyDistanceChart = (props: MonthlyDistanceChartProps) => {
+  const bucketedData = bucketRunsByMonth(props.data, props.year);
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>

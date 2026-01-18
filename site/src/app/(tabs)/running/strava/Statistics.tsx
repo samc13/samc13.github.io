@@ -5,6 +5,12 @@ import { StravaRun } from "./2025/stravaData";
 import { twoDecimals } from "@/app/utils/NumberUtils";
 import clsx from "clsx";
 import flex from "./../../../scaffolding/flex.module.scss";
+import { EnrichedStravaRun } from "./2025/page";
+
+type StatisticsProps = {
+  data: EnrichedStravaRun[];
+  distanceGoal: number;
+};
 
 type DistanceBucketDefinition = { min: number; max?: number };
 
@@ -87,7 +93,7 @@ function formatBucketAsKeyValueContent(
   };
 }
 
-export default function Statistics({ data }: { data: StravaRun[] }) {
+export default function Statistics({ data, distanceGoal }: StatisticsProps) {
   const totalDistance = twoDecimals(
     data.reduce((sum, run) => sum + run.distance, 0)
   );
@@ -97,7 +103,7 @@ export default function Statistics({ data }: { data: StravaRun[] }) {
   const totalRuns = data.length;
   const runsPerWeek = twoDecimals(data.length / weeksSoFar);
   const weeklyDistanceRequired = twoDecimals(
-    (1000 - totalDistance) / remainingWeeks
+    (distanceGoal - totalDistance) / remainingWeeks
   );
   const bucketedData: DistanceBucket[] = groupRunsByCustomBuckets(
     data,
