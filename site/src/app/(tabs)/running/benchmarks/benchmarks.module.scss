@@ -1,0 +1,110 @@
+@import '../../../themecolours.module.scss';
+
+.loading {
+  padding: 1em;
+  color: $font-secondary;
+  font-style: italic;
+}
+
+.error {
+  color: $color-danger;
+}
+
+.distance-selector {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  label {
+    font-weight: bold;
+    color: $text-light;
+  }
+
+  > div {
+    min-width: 200px;
+  }
+}
+
+.benchmark-results {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.year-section {
+  .year-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: $text-light;
+  }
+
+  .year-average {
+    font-size: 1rem;
+    color: $font-secondary;
+    font-weight: 500;
+  }
+}
+
+.efforts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.effort-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  color: $text-light;
+}
+
+.medal {
+  min-width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.medal-gold,
+.medal-silver,
+.medal-bronze {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.medal-gold {
+  background: linear-gradient(135deg, #d4af37 0%, #f0d066 50%, #d4af37 100%);
+  box-shadow: 0 2px 4px rgba(212, 175, 55, 0.4);
+}
+
+.medal-silver {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 50%, #c0c0c0 100%);
+  box-shadow: 0 2px 4px rgba(192, 192, 192, 0.4);
+}
+
+.medal-bronze {
+  background: linear-gradient(135deg, #a0522d 0%, #cd7f32 50%, #a0522d 100%);
+  box-shadow: 0 2px 4px rgba(160, 82, 45, 0.4);
+}
+
+.date {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.time {
+  font-weight: bold;
+  color: $text-light;
+}
