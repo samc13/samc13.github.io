@@ -1,10 +1,13 @@
-import { fetchFromGitHub, GITHUB_REPOS } from "../../../../utils/GithubDataFetcher";
+import {
+  fetchFromGitHub,
+  GITHUB_REPOS,
+} from "../../../utils/GithubDataFetcher";
 
 export type StravaRun = {
-    date: string,
-    distance: number,
-    time: string,
-    pace: string
+  date: string;
+  distance: number;
+  time: string;
+  pace: string;
 };
 
 export async function fetchStravaRunData(): Promise<StravaRun[]> {

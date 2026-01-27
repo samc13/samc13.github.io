@@ -5,7 +5,7 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { XAxisDefault, YAxisDefaults } from "@/app/rechart/AxisDefaults";
 import { twoDecimals } from "@/app/utils/NumberUtils";
 import clsx from "clsx";
-import classes from "./../../rechart.module.scss";
+import classes from "./../rechart.module.scss";
 import { EnrichedStravaRun } from "./page";
 
 type MonthlyDistanceChartProps = {

@@ -1,11 +1,11 @@
 import KeyValue, { KeyValueContent } from "@/app/scaffolding/KeyValue";
 import { Fragment } from "react";
-import { StravaRun } from "./2025/stravaData";
+import { StravaRun } from "./stravaData";
 
 import { twoDecimals } from "@/app/utils/NumberUtils";
 import clsx from "clsx";
 import flex from "./../../../scaffolding/flex.module.scss";
-import { EnrichedStravaRun } from "./2025/page";
+import { EnrichedStravaRun } from "./page";
 
 type StatisticsProps = {
   data: EnrichedStravaRun[];

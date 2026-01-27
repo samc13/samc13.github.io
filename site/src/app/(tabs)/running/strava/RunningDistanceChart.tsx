@@ -13,7 +13,7 @@ import {
 } from "recharts";
 
 import { twoDecimals } from "@/app/utils/NumberUtils";
-import classes from "./../../rechart.module.scss";
+import classes from "./../rechart.module.scss";
 import { EnrichedStravaRun } from "./page";
 
 type RunningDistanceChartProps = {
