@@ -78,8 +78,11 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
             <YAxis
               {...YAxisDefaults}
               dataKey={"cumulativeDistance"}
-              domain={[0, props.distanceGoal + 200]}
-              tickCount={13}
+              domain={[
+                0,
+                props.distanceGoal >= 1000 ? props.distanceGoal + 200 : 1000,
+              ]}
+              tickCount={15}
             />
             <XAxis
               {...XAxisDefault}
@@ -89,7 +92,7 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
               tickFormatter={formatDate}
             />
             <ReferenceLine
-              label="Requirement"
+              label="Target"
               stroke="green"
               strokeDasharray="3 3"
               segment={[
@@ -97,9 +100,20 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
                 { x: endDateFromEpoch, y: props.distanceGoal },
               ]}
             />
+            {props.distanceGoal !== 1000 && (
+              <ReferenceLine
+                label="1000 km"
+                stroke="darkgreen"
+                strokeDasharray="3 3"
+                segment={[
+                  { x: startDateFromEpoch, y: 0 },
+                  { x: endDateFromEpoch, y: 1000 },
+                ]}
+              />
+            )}
             <ReferenceLine
-              label="Target"
-              stroke="green"
+              label={"Goal: " + props.distanceGoal + " km"}
+              stroke="grey"
               strokeDasharray="3 3"
               y={props.distanceGoal}
             />
