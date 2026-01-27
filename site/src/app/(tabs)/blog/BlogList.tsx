@@ -3,18 +3,10 @@
 import { Fragment, useEffect, useState } from "react";
 import { formatBlogPostDate } from "../../utils/DateUtils";
 import fonts from "./../../core/fonts.module.scss";
+import { fetchGitHubDirectoryContents, GITHUB_REPOS } from "../../utils/GithubDataFetcher";
 
 import classes from './bloglist.module.scss';
 import clsx from "clsx";
-
-const BLOG_API_URL =
-  "https://api.github.com/repos/samc13/public-blog/contents/blogs"; // Hardcoded? Woof 🐶
-
-  type GithubContentItem = { 
-    name: string;
-    type: 'file' | 'dir' | 'symlink' | 'submodule';
-    // It has other stuff too but we don't care about any of that (yet)
-  }
 
 const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
   const [files, setFiles] = useState<string[]>([]);
@@ -24,36 +16,22 @@ const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(BLOG_API_URL)
-      .then((res) => {
-        if (!res.ok) {
-          // Log error and set error state
-          setError(`GitHub API error: ${res.status} ${res.statusText}`);
-          console.error("GitHub API error:", res.status, res.statusText);
-          setLoading(false);
-          return Promise.reject(new Error(`GitHub API error: ${res.status}`));
-        }
-        return res.json();
-      })
+    fetchGitHubDirectoryContents({
+      ...GITHUB_REPOS.PUBLIC_BLOG,
+      path: "blogs"
+    })
       .then((data) => {
-        if (!Array.isArray(data)) {
-          setError("Unexpected response format from GitHub API.");
-          console.error("Unexpected data format:", data);
-          setLoading(false);
-          return;
-        }
         // Only include markdown files
         const mdFiles = data
           .filter(
-            (item: GithubContentItem) =>
+            (item) =>
               item.type === "file" && /^[0-9]{8}\.md$/.test(item.name)
           )
-          .map((item: GithubContentItem) => item.name);
+          .map((item) => item.name);
         setFiles(mdFiles);
         setLoading(false);
       })
       .catch((err) => {
-        // Catch network/other errors
         setError("Failed to fetch blog posts: " + err.message);
         console.error("Fetch error:", err);
         setLoading(false);

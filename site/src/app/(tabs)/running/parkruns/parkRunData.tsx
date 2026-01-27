@@ -1,5 +1,6 @@
 import { formatDateAsDaySinceEpoch } from "../../../utils/DateUtils";
 import { convertTimeToSeconds } from "../../../utils/TimeUtils";
+import { fetchFromGitHub, GITHUB_REPOS } from "../../../utils/GithubDataFetcher";
 
 export type ParkRun = {
   eventName: string;
@@ -14,9 +15,11 @@ export type EnrichedParkRunData = ParkRun & {
 };
 
 export async function fetchParkRunData(): Promise<ParkRun[]> {
-  const res = await fetch("/resources/parkRuns.json");
-  const data = await res.json();
-  return data as ParkRun[];
+  // Fetch from public-data repository
+  return fetchFromGitHub<ParkRun[]>({
+    ...GITHUB_REPOS.PUBLIC_DATA,
+    path: "parkRuns.json",
+  });
 }
 
 export function enrichParkRunData(rawData: ParkRun[]): EnrichedParkRunData[] {

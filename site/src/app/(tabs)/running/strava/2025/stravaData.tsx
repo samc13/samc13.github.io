@@ -1,3 +1,5 @@
+import { fetchFromGitHub, GITHUB_REPOS } from "../../../../utils/GithubDataFetcher";
+
 export type StravaRun = {
     date: string,
     distance: number,
@@ -6,7 +8,8 @@ export type StravaRun = {
 };
 
 export async function fetchStravaRunData(): Promise<StravaRun[]> {
-  const res = await fetch('/resources/stravaData.json');
-  const data = await res.json();
-  return data as StravaRun[];
+  return fetchFromGitHub<StravaRun[]>({
+    ...GITHUB_REPOS.PUBLIC_DATA,
+    path: "stravaData.json",
+  });
 }
