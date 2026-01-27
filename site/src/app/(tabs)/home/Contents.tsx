@@ -14,6 +14,7 @@ export default function Contents() {
         <TabGroup title="&#9662; Running." classes={clsx(classes["tabgroup"])}>
           <Link href="/running/parkruns" text="Parkruns." newTab={false} />
           <Link href="/running/strava" text="Strava." newTab={false} />
+          <Link href="/running/benchmarks" text="Benchmarks." newTab={false} />
         </TabGroup>
         <Link href="/blog" text="Blog." newTab={false} />
         <Link href="/about" text="About." newTab={false} />
