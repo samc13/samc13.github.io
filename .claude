@@ -1,0 +1,6 @@
+# Technical Conventions
+
+## Styling
+
+- No inline `style` attributes
+- All CSS must be in `{name}.module.scss` files and imported
