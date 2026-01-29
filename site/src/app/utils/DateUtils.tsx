@@ -17,6 +17,10 @@ export function formatDateAsDaySinceEpoch(rawDate: string): number {
   return Math.floor(date.diff(epoch, "days"));
 }
 
+export function matchesFormatYYYYMMDD(dateString: string): boolean {
+  return /^[0-9]{8}$/.test(dateString);
+}
+
 export function formatBlogPostDate(filename: string): string {
   const date = moment(filename, "YYYYMMDD");
   return date.format("YYYY-MM-DD");

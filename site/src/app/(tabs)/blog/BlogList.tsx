@@ -1,12 +1,15 @@
 "use client";
 
 import { Fragment, useEffect, useState } from "react";
-import { formatBlogPostDate } from "../../utils/DateUtils";
+import {
+  fetchGitHubDirectoryContents,
+  GITHUB_REPOS,
+} from "../../utils/GithubDataFetcher";
 import fonts from "./../../core/fonts.module.scss";
-import { fetchGitHubDirectoryContents, GITHUB_REPOS } from "../../utils/GithubDataFetcher";
 
-import classes from './bloglist.module.scss';
 import clsx from "clsx";
+import classes from "./bloglist.module.scss";
+import { formatBlogPostTitle } from "./BlogPost";
 
 const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
   const [files, setFiles] = useState<string[]>([]);
@@ -18,15 +21,12 @@ const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
     setLoading(true);
     fetchGitHubDirectoryContents({
       ...GITHUB_REPOS.PUBLIC_BLOG,
-      path: "blogs"
+      path: "blogs",
     })
       .then((data) => {
-        // Only include markdown files
         const mdFiles = data
-          .filter(
-            (item) =>
-              item.type === "file" && /^[0-9]{8}\.md$/.test(item.name)
-          )
+          .filter((item) => item.type === "file")
+          .filter((item) => item.name.endsWith(".md"))
           .map((item) => item.name);
         setFiles(mdFiles);
         setLoading(false);
@@ -49,16 +49,25 @@ const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
           </div>
         )}
         {error && <div style={{ color: "red" }}>{error}</div>}
-          {files.map((file, i) => (
-            <div key={i} className={clsx(classes["blog-item"])}>
-              <button onClick={() => {
+        {files.map((file, i) => (
+          <div key={i} className={clsx(classes["blog-item"])}>
+            <button
+              onClick={() => {
                 onSelect(file);
                 setActiveItem(file);
-                }}>
-                <p className={clsx(fonts["code"], file == activeItem ? classes["active-item"] : "")}>{formatBlogPostDate(file)}</p>
-              </button>
-            </div>
-          ))}
+              }}
+            >
+              <p
+                className={clsx(
+                  fonts["code"],
+                  file == activeItem ? classes["active-item"] : "",
+                )}
+              >
+                {formatBlogPostTitle(file)}
+              </p>
+            </button>
+          </div>
+        ))}
       </div>
     </Fragment>
   );
