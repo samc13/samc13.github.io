@@ -73,11 +73,12 @@ const RunningDistanceChart = (props: RunningDistanceChartProps) => {
             margin={{ top: 25, bottom: 25, left: 0, right: 25 }}
           >
             <DefaultRechartTooltip
-              labelFormatter={(label: number) => formatDate(label)}
+              labelFormatter={(label) => formatDate(label as number)}
             />
             <YAxis
               {...YAxisDefaults}
               dataKey={"cumulativeDistance"}
+              label={{ value: "Distance (km)", angle: -90 }}
               domain={[
                 0,
                 props.distanceGoal >= 1000 ? props.distanceGoal + 200 : 1000,

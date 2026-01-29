@@ -34,7 +34,7 @@ const lastSixMonths = "lastSixMonths";
 function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
   // get all unique dates
   const dates = Array.from(
-    new Set(parkRunData.map((d) => d.dayRelativeToEpoch))
+    new Set(parkRunData.map((d) => d.dayRelativeToEpoch)),
   ).sort();
   // get all unique event names
   const eventNames = Array.from(new Set(parkRunData.map((d) => d.eventName)));
@@ -48,7 +48,7 @@ function formatDataAsSeries(parkRunData: EnrichedParkRunData[]) {
     for (const event of eventNames) {
       const entry = parkRunData.find(
         (d) =>
-          d.dayRelativeToEpoch === dayRelativeToEpoch && d.eventName === event
+          d.dayRelativeToEpoch === dayRelativeToEpoch && d.eventName === event,
       );
       row[event] = entry ? entry.totalSeconds : undefined;
     }
@@ -107,7 +107,7 @@ const ParkRunChart = () => {
   ];
 
   const enrichedData = enrichParkRunData(parkRuns).sort(
-    ({ dayRelativeToEpoch: a }, { dayRelativeToEpoch: b }) => a - b
+    ({ dayRelativeToEpoch: a }, { dayRelativeToEpoch: b }) => a - b,
   );
 
   const filteredData = enrichedData.filter((d) => {
@@ -131,7 +131,7 @@ const ParkRunChart = () => {
 
   const bestTime: number = [...filteredData]
     .filter(
-      (e) => selectedEventName === all || e.eventName === selectedEventName
+      (e) => selectedEventName === all || e.eventName === selectedEventName,
     )
     .sort(({ totalSeconds: a }, { totalSeconds: b }) => a - b)[0]?.totalSeconds;
 
@@ -214,8 +214,8 @@ const ParkRunChart = () => {
             <Legend />
             <ReferenceLine label="Best" y={bestTime} strokeDasharray="3 3" />
             <DefaultRechartTooltip
-              labelFormatter={(label: number) => formatDate(label)}
-              formatter={(value: string) =>
+              labelFormatter={(label) => formatDate(label as number)}
+              formatter={(value) =>
                 formatTotalSeconds(value as unknown as number)
               }
             />

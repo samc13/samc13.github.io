@@ -75,10 +75,10 @@ const MonthlyDistanceChart = (props: MonthlyDistanceChartProps) => {
             data={bucketedData}
             margin={{ top: 25, bottom: 25, left: 0, right: 25 }}
           >
-            <DefaultRechartTooltip labelFormatter={(label: number) => label} />
+            <DefaultRechartTooltip labelFormatter={(label) => label} />
             <YAxis
               {...YAxisDefaults}
-              label={{ value: "Distance", angle: "-90" }}
+              label={{ value: "Distance (km)", angle: -90 }}
               domain={[0, 175]}
               tickCount={11}
             />
