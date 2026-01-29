@@ -1,6 +1,4 @@
-// Combined approach: Enum with hex color values
 enum ColorName {
-  // Original fantastic colors
   PINK = "#e26ee6",
   YELLOW = "#d9ce3f",
   TEAL = "#42f5cb",
@@ -17,9 +15,22 @@ enum ColorName {
   TURQUOISE = "#48cae4",
   LILAC = "#c8a2c8",
   SOFT_BLUE = "#87ceeb",
+  BLUSH = "#ffb3ba",
+  POWDER_BLUE = "#b4d4e7",
+  LEMON = "#f4e87c",
+  ROSE = "#ffa5a5",
+  PISTACHIO = "#c1e1c1",
+  SAND = "#f4d4a3",
+  ORCHID = "#daa5d4",
+  SKY = "#a8dadc",
+  CHAMPAGNE = "#f7d794",
+  PERIWINKLE_BLUE = "#a4b8d3",
+  HONEY = "#f3c98b",
+  MINT_CREAM = "#baf2d8",
+  WISTERIA = "#c3a6cb",
+  BUTTER = "#ffeaa7",
 }
 
-// TODO: More colours
 const placeColorMap: Record<string, ColorName> = {
   ArrowValley: ColorName.SOFT_BLUE,
   Birkenhead: ColorName.ROSE_GOLD,
@@ -34,11 +45,11 @@ const placeColorMap: Record<string, ColorName> = {
   Millfield: ColorName.APRICOT,
   RothayPark: ColorName.TURQUOISE,
   Roundhay: ColorName.SEAFOAM,
-  RoundhayWinter: ColorName.SOFT_BLUE,
+  RoundhayWinter: ColorName.POWDER_BLUE,
   ToottingCommon: ColorName.LILAC,
   VictoriaDock: ColorName.PINK,
   WarwickRacecourse: ColorName.PERIWINKLE,
-  WoodhouseMoor: ColorName.PINK,
+  WoodhouseMoor: ColorName.SAND,
 };
 
 // Helper function to get the actual hex color for a place
@@ -48,7 +59,7 @@ const getColorForPlace = (place: string): string => {
 };
 
 const LocationColorMap: Record<string, string> = Object.fromEntries(
-  Object.entries(placeColorMap).map(([place, colorName]) => [place, colorName])
+  Object.entries(placeColorMap).map(([place, colorName]) => [place, colorName]),
 );
 
 export { ColorName, getColorForPlace, placeColorMap };
