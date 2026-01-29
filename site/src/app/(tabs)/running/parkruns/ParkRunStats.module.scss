@@ -1,3 +1,5 @@
+@import './../../../colourpalette.module.scss';
+
 .container {
   padding: 20px;
 }
@@ -11,10 +13,11 @@
   border-collapse: collapse;
   background-color: var(--background);
   color: var(--text-color);
+  border-radius: 10px;
 }
 
 .tableHeader {
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid var(--foreground);
 }
 
 .tableHeaderCell {
@@ -26,14 +29,15 @@
 .sortableHeader {
   cursor: pointer;
   user-select: none;
+  border-radius: 10px;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: $darkForestGreen;
   }
 }
 
 .tableRow {
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--background-darker);
   
   &:hover {
     background-color: #333;
