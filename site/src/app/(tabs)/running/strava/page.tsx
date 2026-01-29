@@ -1,4 +1,5 @@
 "use client";
+import Content from "@/app/scaffolding/Content";
 import Divider from "@/app/scaffolding/Divider";
 import SectionTitle from "@/app/scaffolding/SectionTitle";
 import { formatDateAsDaySinceEpoch } from "@/app/utils/DateUtils";
@@ -36,7 +37,7 @@ export default function Year2025Page() {
   const [yearOptions, setYearOptions] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState(2026);
   const [filteredRunData, setFilteredRunData] = useState<EnrichedStravaRun[]>(
-    []
+    [],
   );
 
   useEffect(() => {
@@ -52,53 +53,56 @@ export default function Year2025Page() {
 
   return (
     <Fragment>
-      <Select
-        inputId="strava-year-select"
-        className={styles["my-select"]}
-        options={yearOptions.map((year) => ({
-          value: year,
-          label: year.toString(),
-        }))}
-        value={{ value: selectedYear, label: selectedYear.toString() }}
-        onChange={(opt) => setSelectedYear(opt ? opt.value : 2026)}
-        isSearchable
-        styles={{
-          singleValue: (provided) => ({
-            ...provided,
-            color: "#fff",
-          }),
-          control: (provided) => ({
-            ...provided,
-            backgroundColor: backgroundColor,
-            color: "white",
-          }),
-          container: (provided) => ({ ...provided, minWidth: 220 }),
-          menu: (provided) => ({
-            ...provided,
-            backgroundColor: "#222", // <-- dropdown background
-            color: "white",
-          }),
-          option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? "#333" : "#222",
-            color: "white",
-          }),
-        }}
-      />
-      <SectionTitle text={`${selectedYear} Running Distance`} />
-      <Statistics data={filteredRunData} distanceGoal={distanceGoal} />
-      <Divider />
-      <div>
-        <RunningDistanceChart
-          data={filteredRunData}
-          year={selectedYear}
-          distanceGoal={distanceGoal}
+      <Content>
+        <Divider />
+        <Select
+          inputId="strava-year-select"
+          className={styles["my-select"]}
+          options={yearOptions.map((year) => ({
+            value: year,
+            label: year.toString(),
+          }))}
+          value={{ value: selectedYear, label: selectedYear.toString() }}
+          onChange={(opt) => setSelectedYear(opt ? opt.value : 2026)}
+          isSearchable
+          styles={{
+            singleValue: (provided) => ({
+              ...provided,
+              color: "#fff",
+            }),
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: backgroundColor,
+              color: "white",
+            }),
+            container: (provided) => ({ ...provided, minWidth: 220 }),
+            menu: (provided) => ({
+              ...provided,
+              backgroundColor: "#222", // <-- dropdown background
+              color: "white",
+            }),
+            option: (provided, state) => ({
+              ...provided,
+              backgroundColor: state.isFocused ? "#333" : "#222",
+              color: "white",
+            }),
+          }}
         />
-      </div>
-      <Divider />
-      <div>
-        <MonthlyDistanceChart data={filteredRunData} year={selectedYear} />
-      </div>
+        <SectionTitle text={`${selectedYear} Running Distance`} />
+        <Statistics data={filteredRunData} distanceGoal={distanceGoal} />
+        <Divider />
+        <div>
+          <RunningDistanceChart
+            data={filteredRunData}
+            year={selectedYear}
+            distanceGoal={distanceGoal}
+          />
+        </div>
+        <Divider />
+        <div>
+          <MonthlyDistanceChart data={filteredRunData} year={selectedYear} />
+        </div>
+      </Content>
     </Fragment>
   );
 }

@@ -56,7 +56,7 @@ export function bucketRunsByMonth(runs: EnrichedStravaRun[], year: number) {
       const monthIndex = date.getMonth(); // 0-indexed month
       buckets[monthIndex].totalDistance += run.distance;
       buckets[monthIndex].totalDistance = twoDecimals(
-        buckets[monthIndex].totalDistance
+        buckets[monthIndex].totalDistance,
       );
     }
   });
@@ -69,7 +69,7 @@ const MonthlyDistanceChart = (props: MonthlyDistanceChartProps) => {
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>
-        <ResponsiveContainer width="100%" height={600}>
+        <ResponsiveContainer width={"100%"} height={400}>
           <BarChart
             title="2025"
             data={bucketedData}

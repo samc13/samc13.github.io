@@ -28,10 +28,10 @@ type CumulativeRunData = {
 };
 
 function createCumulativeDistanceData(
-  data: EnrichedStravaRun[]
+  data: EnrichedStravaRun[],
 ): CumulativeRunData[] {
   const sortedData = [...data].sort(
-    (a, b) => a.dayRelativeToEpoch - b.dayRelativeToEpoch
+    (a, b) => a.dayRelativeToEpoch - b.dayRelativeToEpoch,
   );
   let cumulativeDistance = 0;
 
@@ -55,18 +55,18 @@ function getEndOfYear(year: number) {
 
 const RunningDistanceChart = (props: RunningDistanceChartProps) => {
   const chartData: CumulativeRunData[] = createCumulativeDistanceData(
-    props.data
+    props.data,
   );
   const startDateFromEpoch: number = formatDateAsDaySinceEpoch(
-    getStartOfYear(props.year)
+    getStartOfYear(props.year),
   );
   const endDateFromEpoch: number = formatDateAsDaySinceEpoch(
-    getEndOfYear(props.year)
+    getEndOfYear(props.year),
   );
   return (
     <Fragment>
       <div className={clsx(classes["chart-container"])}>
-        <ResponsiveContainer width="100%" height={600}>
+        <ResponsiveContainer width={"100%"} height={500}>
           <ComposedChart
             title="2025"
             data={chartData}
