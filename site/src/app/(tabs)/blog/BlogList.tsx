@@ -27,6 +27,7 @@ const BlogList = ({ onSelect }: { onSelect: (filename: string) => void }) => {
         const mdFiles = data
           .filter((item) => item.type === "file")
           .filter((item) => item.name.endsWith(".md"))
+          .filter((item) => !item.name.startsWith("desert_island")) // Contains images, which I don't support yet
           .map((item) => item.name);
         setFiles(mdFiles);
         setLoading(false);
