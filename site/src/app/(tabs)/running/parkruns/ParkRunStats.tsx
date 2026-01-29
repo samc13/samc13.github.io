@@ -179,26 +179,26 @@ const ParkRunStats = () => {
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
-                        {{
-                          asc: (
-                            <span>
-                              {" "}
-                              <RiArrowUpLine
-                                className={clsx(iconClasses["inline-icon"])}
-                                size={16}
-                              />
-                            </span>
-                          ),
-                          desc: (
-                            <span>
-                              {" "}
-                              <RiArrowDownLine
-                                className={clsx(iconClasses["inline-icon"])}
-                                size={16}
-                              />
-                            </span>
-                          ),
-                        }[header.column.getIsSorted() as string] ?? null}
+                        <span className={styles.sortIconWrapper}>
+                          <RiArrowUpLine
+                            className={clsx(
+                              iconClasses["inline-icon"],
+                              styles.sortIcon,
+                              header.column.getIsSorted() === "asc" &&
+                                styles.visible,
+                            )}
+                            size={16}
+                          />
+                          <RiArrowDownLine
+                            className={clsx(
+                              iconClasses["inline-icon"],
+                              styles.sortIcon,
+                              header.column.getIsSorted() === "desc" &&
+                                styles.visible,
+                            )}
+                            size={16}
+                          />
+                        </span>
                       </div>
                     )}
                   </th>
