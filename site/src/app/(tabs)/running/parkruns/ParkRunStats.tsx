@@ -1,5 +1,6 @@
 "use client";
 import { convertTimeToSeconds } from "@/app/utils/TimeUtils";
+import { RiArrowDownLine, RiArrowUpLine } from "@remixicon/react";
 import {
   createColumnHelper,
   flexRender,
@@ -7,8 +8,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import clsx from "clsx";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import iconClasses from "./../../../core/icons.module.scss";
 import { fetchParkRunData, ParkRun } from "./parkRunData";
 import styles from "./ParkRunStats.module.scss";
 import { getColorForPlace } from "./seriesColours";
@@ -87,6 +90,7 @@ const columnHelper = createColumnHelper<LocationStats>();
 const columns = [
   columnHelper.accessor("eventName", {
     header: "Location",
+    sortDescFirst: true,
     cell: (info) => (
       <span
         style={{
@@ -100,18 +104,38 @@ const columns = [
   }),
   columnHelper.accessor("bestTime", {
     header: "Best Time",
+    sortDescFirst: true,
+    sortingFn: (rowA, rowB) => {
+      const timeA = convertTimeToSeconds(rowA.getValue("bestTime"));
+      const timeB = convertTimeToSeconds(rowB.getValue("bestTime"));
+      return timeA - timeB;
+    },
   }),
   columnHelper.accessor("averageTime", {
     header: "Avg Time",
+    sortDescFirst: true,
+    sortingFn: (rowA, rowB) => {
+      const timeA = convertTimeToSeconds(rowA.getValue("averageTime"));
+      const timeB = convertTimeToSeconds(rowB.getValue("averageTime"));
+      return timeA - timeB;
+    },
   }),
   columnHelper.accessor("bestPosition", {
     header: "Position",
+    sortDescFirst: true,
   }),
   columnHelper.accessor("numberOfVisits", {
     header: "Visits",
+    sortDescFirst: true,
   }),
   columnHelper.accessor("formattedDate", {
     header: "PB Date",
+    sortDescFirst: true,
+    sortingFn: (rowA, rowB) => {
+      const dateA = rowA.original.bestRunDate;
+      const dateB = rowB.original.bestRunDate;
+      return dateA.localeCompare(dateB);
+    },
   }),
 ];
 
@@ -153,11 +177,27 @@ const ParkRunStats = () => {
                       >
                         {flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                         {{
-                          asc: " 🔼",
-                          desc: " 🔽",
+                          asc: (
+                            <span>
+                              {" "}
+                              <RiArrowUpLine
+                                className={clsx(iconClasses["inline-icon"])}
+                                size={16}
+                              />
+                            </span>
+                          ),
+                          desc: (
+                            <span>
+                              {" "}
+                              <RiArrowDownLine
+                                className={clsx(iconClasses["inline-icon"])}
+                                size={16}
+                              />
+                            </span>
+                          ),
                         }[header.column.getIsSorted() as string] ?? null}
                       </div>
                     )}
